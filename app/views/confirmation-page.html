@@ -1,0 +1,62 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {{ govukPanel({
+        titleText: "Accessibility statement complete"
+      }) }}
+
+      <p>
+        Your accessibility statement is now complete.
+      </p>
+
+      <p>
+        You can download the statement below in HTML, Markdown, PDF and Word formats.
+      </p>
+
+      <h2 class="govuk-heading-m">
+        Download statement
+      </h2>
+
+      <p>
+        <a href="#">Download HTML</a> (1.2mb)
+      </p>
+      <p>
+        <a href="#">Download Markdown</a> (1.2mb)
+      </p>
+      <p>
+        <a href="#">Download PDF</a> (1.2mb)
+      </p>
+      <p>
+        <a href="#">Download Word</a> (1.2mb)
+      </p>
+
+      {{ govukButton({
+        text: "Back to services"
+      }) }}
+
+
+      <p>
+        <a href="#">
+          What did you think of this service?
+        </a> (takes 30 seconds)
+      </p>
+
+  </div>
+</div>
+
+{% endblock %}
