@@ -19,11 +19,13 @@
       <form class="form" action="/name-audit" method="post">
         
           {% from "govuk/components/date-input/macro.njk" import govukDateInput %}
-
+          
           {{ govukDateInput({
             id: "audit-date",
             namePrefix: "audit-date",
+            name: "auditDate",
             fieldset: {
+              value: {day: audit-date-day,month: audit-date-month,year: audit-date-year},
               legend: {
                 text: "When was the audit completed?",
                 isPageHeading: true,

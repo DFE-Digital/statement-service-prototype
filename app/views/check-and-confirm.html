@@ -102,6 +102,7 @@
       <h2 class="govuk-heading-m">
         Audit details
       </h2>
+      {%set date = data['audit-date-day'] +'/'+ data['audit-date-month'] +'/'+ data['audit-date-year']%}
       {{ govukSummaryList({
         rows: [
           {
@@ -127,7 +128,7 @@
               text: "Date audit completed"
             },
             value: {
-              text: data['auditDate']
+              text: date
             },
             actions: {
               items: [
