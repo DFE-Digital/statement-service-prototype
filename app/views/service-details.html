@@ -1,0 +1,78 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Service details
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <p>
+          {% from "govuk/components/input/macro.njk" import govukInput %}
+
+{{ govukInput({
+  label: {
+    text: "What is the name of the service?",
+    classes: "govuk-label--2",
+    isPageHeading: false
+  },
+  id: "service-name",
+  name: "serviceName"
+}) }}{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{{ govukInput({
+  label: {
+    text: "What is the name of team that manages the service?",
+    classes: "govuk-label--2",
+    isPageHeading: true
+  },
+  id: "team-name",
+  name: "teamName"
+}) }}{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{{ govukInput({
+  label: {
+    text: "What is the name of the product manager or responsible officer?",
+    classes: "govuk-label--2",
+    isPageHeading: true
+  },
+  id: "pm-ro-name",
+  name: "pmRoName"
+}) }}{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{{ govukInput({
+  label: {
+    text: "What is the contact email for the team?",
+    classes: "govuk-label--2",
+    isPageHeading: true
+  },
+  id: "team-email",
+  name: "teamEmail"
+}) }}
+        </p>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
