@@ -17,13 +17,14 @@
     <div class="govuk-grid-column-two-thirds">
 
 
-      <form class="form" action="/path/of/next/page" method="post">
+      <form class="form" action="/did-audit-find-issues-answer" method="post">
 
         <p>
           {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
           {{ govukRadios({
-            name: "didAuditFindIssues",
+            name: "did-audit-find-issues",
+            value: data['did-audit-find-issues'],
             fieldset: {
               legend: {
                 text: "Did the audit find any accessibility issues?",
