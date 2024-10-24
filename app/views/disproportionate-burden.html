@@ -19,6 +19,7 @@
 
         {% from "govuk/components/radios/macro.njk" import govukRadios %}
         {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+        {% from "govuk/components/details/macro.njk" import govukDetails %}
 
         {% set yesHtml %}
         {{ govukTextarea({
@@ -75,6 +76,11 @@
               }
             }
           ]
+        }) }}
+
+        {{ govukDetails({
+          summaryText: "More on disproportionate burden",
+          text: "Read the (Link)DWP disproportionate burden guidance (opens in a new tab) for more information."
         }) }}
 
         {{ govukButton({
