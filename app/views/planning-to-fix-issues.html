@@ -26,11 +26,11 @@
           {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
           {{ govukRadios({
-            name: "how-many-balls",
+            name: "planning-fix-issues",
             value: data['how-many-balls'],
             fieldset: {
               legend: {
-                text: "How many balls can you juggle?",
+                text: "Are you planning to fix the issues?",
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
