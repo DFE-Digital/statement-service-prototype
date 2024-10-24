@@ -20,17 +20,18 @@
         
       </h1>
 
-      <form class="form" action="/path/of/next/page" method="post">
+      <form class="form" action="/planning-to-fix-issues-answer" method="post">
 
         <p>
           {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
           {{ govukRadios({
-            name: "planning-fix-issues",
-            value: data['how-many-balls'],
+            name: "planning-to-fix-issues",
+            value: data['planning-to-fix-issues'],
             fieldset: {
               legend: {
                 text: "Are you planning to fix the issues?",
+
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
               }
