@@ -1,0 +1,74 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Contact information
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        <p>
+          {% from "govuk/components/input/macro.njk" import govukInput %}
+
+          {{ govukInput({
+            label: {
+              text: "Email address users can contact to report issues"
+            },
+            hint: {
+              text: "For example, example@example.gov.uk"
+            },
+            id: "email-to-report-issues",
+            name: "email-to-report-issues"
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Email address users can contact to receive data in a different format"
+            },
+            hint: {
+              text: "For example, example@example.gov.uk"
+            },
+            id: "email-for-different-format",
+            name: "email-for-different-format"
+          }) }}
+
+          {{ govukInput({
+            id: "days-for-reply",
+            name: "days-for-reply",
+            label: {
+              text: "How long will it take for users to get a reply?"
+            },
+            suffix: {
+              text: "business days"
+            },
+            classes: "govuk-input--width-2",
+            spellcheck: false
+          }) }}
+           
+        </p>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
