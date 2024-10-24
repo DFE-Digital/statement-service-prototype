@@ -29,7 +29,7 @@
               text: "Service name"
             },
             value: {
-              text: "example"
+            text: data['serviceName']
             },
             actions: {
               items: [
@@ -47,7 +47,7 @@
               text: "Team name"
             },
             value: {
-              text: "example"
+              text: data['teamName']
             },
             actions: {
               items: [
@@ -65,7 +65,7 @@
               text: "Service owner"
             },
             value: {
-              text: "example"
+              text: data['pmRoName']
             },
             actions: {
               items: [
@@ -83,7 +83,7 @@
               text: "Team's contact email"
             },
             value: {
-              text: "example"
+              text: data['teamEmail']
             },
             actions: {
               items: [
@@ -203,14 +203,14 @@
             text: "Report accessibility issues"
           },
           value: {
-            text: "example"
+            text: data['email-to-report-issues']
           },
           actions: {
             items: [
               {
                 href: "#",
                 text: "Change",
-                visuallyHiddenText: "Rport accessibility issues"
+                visuallyHiddenText: "Report accessibility issues"
               }
             ]
           }
@@ -221,7 +221,7 @@
             text: "Recieve data in a different format"
           },
           value: {
-            text: "example"
+            text: data['email-for-different-format']
           },
           actions: {
             items: [
@@ -239,7 +239,7 @@
             text: "Time to respond to user"
           },
           value: {
-            text: "example"
+            text: data['days-for-reply']
           },
           actions: {
             items: [
