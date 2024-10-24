@@ -15,7 +15,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <form class="form" action="/path/of/next/page" method="post">
+      <form class="form" action="/contact-information" method="post">
 
         {% from "govuk/components/radios/macro.njk" import govukRadios %}
         {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
@@ -25,7 +25,7 @@
         {{ govukTextarea({
           id: "yes",
           name: "yes",
-          type: "email",
+          type: "text",
           spellcheck: false,
           label: {
             text: "What are you doing to apply disproportionate burden?"
@@ -40,7 +40,7 @@
         {{ govukTextarea({
           id: "yes",
           name: "yes",
-          type: "email",
+          type: "text",
           spellcheck: false,
           label: {
             text: "Why?"
@@ -80,7 +80,7 @@
 
         {{ govukDetails({
           summaryText: "More on disproportionate burden",
-          html: 'Read the <a href="#" class="govuk-link">DWP disproportionate burden guidance (opens in a new tab)</a> for more information.'
+          html: 'Read the <a href="https://accessibility-manual.dwp.gov.uk/accessibility-law/disproportionate-burden#:~:text=The%20only%20way%20your%20service,your%20organisations%20ability%20to%20function" class="govuk-link">DWP disproportionate burden guidance (opens in a new tab)</a> for more information.'
         }) }}
 
         {{ govukButton({
