@@ -16,13 +16,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/audit find any issues page" method="post">
+      <form class="form" action="/name-audit" method="post">
         
           {% from "govuk/components/date-input/macro.njk" import govukDateInput %}
 
           {{ govukDateInput({
-            id: "audit-completed",
-            namePrefix: "audit-completed",
+            id: "audit-date",
+            namePrefix: "audit-date",
             fieldset: {
               legend: {
                 text: "When was the audit completed?",

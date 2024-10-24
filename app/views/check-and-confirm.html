@@ -202,14 +202,14 @@
             text: "Report accessibility issues"
           },
           value: {
-            text: "example"
+            text: data['email-to-report-issues']
           },
           actions: {
             items: [
               {
                 href: "#",
                 text: "Change",
-                visuallyHiddenText: "Rport accessibility issues"
+                visuallyHiddenText: "Report accessibility issues"
               }
             ]
           }
@@ -220,7 +220,7 @@
             text: "Recieve data in a different format"
           },
           value: {
-            text: "example"
+            text: data['email-for-different-format']
           },
           actions: {
             items: [
@@ -238,7 +238,7 @@
             text: "Time to respond to user"
           },
           value: {
-            text: "example"
+            text: data['days-for-reply']
           },
           actions: {
             items: [
@@ -255,10 +255,10 @@
       
     }) }}
 
-      <form action="/confirmation" method="post" novalidate>
+      <form action="/confirmation-page" method="post" novalidate>
 
         {{ govukButton({
-          text: "Accept and send"
+          text: "Save and continue"
         }) }}
 
       </form>
