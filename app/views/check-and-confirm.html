@@ -1,0 +1,268 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Check your answers template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-l">
+        Check and confirm
+      </h1>
+      <h2 class="govuk-heading-m">
+        Service details
+      </h2>
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Service name"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Service name"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Team name"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Team name"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Service owner"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Service owner"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Team's contact email"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Question 2"
+                }
+              ]
+            }
+          }
+        ]
+        
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Audit details
+      </h2>
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Audit completed by"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Audit completed by"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Date audit completed"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Date audit completed"
+                }
+              ]
+            }
+          }
+          
+        ]
+        
+      }) }}
+
+      <h2 class="govuk-heading-m">
+        Issues
+      </h2>
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "issue"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "issue"
+                }
+              ]
+            }
+          }
+          ,
+          {
+            key: {
+              text: "Issue"
+            },
+            value: {
+              text: "example"
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "Issue"
+                }
+              ]
+            }
+          }
+
+          
+          
+        ]
+        
+      })
+    
+    }}
+
+    <h2 class="govuk-heading-m">
+      Contact details
+    </h2>
+    {{ govukSummaryList({
+      rows: [
+        {
+          key: {
+            text: "Report accessibility issues"
+          },
+          value: {
+            text: "example"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "Rport accessibility issues"
+              }
+            ]
+          }
+        }
+        ,
+        {
+          key: {
+            text: "Recieve data in a different format"
+          },
+          value: {
+            text: "example"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "Recieve data in a different format"
+              }
+            ]
+          }
+        }
+        ,
+        {
+          key: {
+            text: "Time to respond to user"
+          },
+          value: {
+            text: "example"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "time to respond to user"
+              }
+            ]
+          }
+        }
+        
+      ]
+      
+    }) }}
+
+      <form action="/confirmation" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Accept and send"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
