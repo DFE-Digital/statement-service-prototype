@@ -65,13 +65,13 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
     }
 
     // Get the submitted data from the request session
-const approvedProduct = {
+    const approvedProduct = {
         id: generateRandomId(),
-        principle: req.session.data['approved-name'],
+        principle: req.session.data['POUR-selection'],
         criteria: req.session.data['approved-vendor'],
-        fixIssueYN: req.session.data['approved-version'],
-        howFixIssue: req.session.data['approved-usecase'],
-        whyNotFixIssue: req.session.data['approved-usecase']
+        fixIssueYN: req.session.data['planning-to-fix-issue'],
+        howFixIssue: req.session.data['how-fix-issue'],
+        whyNotFixIssue: req.session.data['no-fix-issue']
     };
 
     // Push the new approved product to the session array

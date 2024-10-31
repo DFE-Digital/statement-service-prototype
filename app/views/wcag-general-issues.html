@@ -25,7 +25,8 @@
         {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
 {{ govukRadios({
-  name: "whereDoYouLive",
+  name: "POUR-selection",
+  value: data['POUR-selection'],
   fieldset: {
     legend: {
       isPageHeading: true,

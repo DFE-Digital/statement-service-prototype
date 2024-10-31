@@ -21,8 +21,8 @@
         {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 
         {{ govukTextarea({
-          name: "moreDetail",
-          id: "fix-issue",
+          name: "how-fix-issue",
+          value: data['how-fix-issue'],
           label: {
             text: "What are you doing to fix the issue?",
             classes: "govuk-label--l",
