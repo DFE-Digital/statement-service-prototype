@@ -17,16 +17,40 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        Heading or question goes here
+        Select the WCAG criteria that has not been met
       </h1>
 
       <form class="form" action="/path/of/next/page" method="post">
 
-        <p>
-          [Insert question content here - see the
-          <a href="https://design-system.service.gov.uk">GOV.UK Design System</a>
-          for examples]
-        </p>
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{{ govukRadios({
+  name: "whereDoYouLive",
+  fieldset: {
+    legend: {
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    }
+  },
+  items: [
+    {
+      value: "Perceivable",
+      text: "1. Perceivable"
+    },
+    {
+      value: "Operable",
+      text: "2. Operable"
+    },
+    {
+      value: "Understandable",
+      text: "3. Understandable"
+    },
+    {
+      value: "Robust",
+      text: "4. Robust"
+    }
+  ]
+}) }}
 
         {{ govukButton({
           text: "Continue"
