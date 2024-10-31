@@ -17,7 +17,7 @@ function filterByPrinciple(selectedPrinciple) {
 }
 
 router.get('/wcag-specific-issues', function (req, res) { 
-  let selectedPrinciple = req.session.data['POUR-selection'];
+  let selectedPrinciple = req.session.data['pour-selection'];
   if (selectedPrinciple != "") {
 
     //console.log(data)
@@ -31,6 +31,15 @@ router.get('/wcag-specific-issues', function (req, res) {
     return res.redirect('wcag-general-issues')
   }
 
+
+
+})
+
+//
+router.post('/wcag-general-issues-answer', function (req, res) {
+
+
+    res.redirect('/wcag-specific-issues')
 
 
 })
