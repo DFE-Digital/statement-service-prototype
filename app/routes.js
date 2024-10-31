@@ -6,6 +6,10 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+function generateRandomId() {
+  return Math.random().toString(36).substr(2, 9); //Generates a random string
+}
+
 // Run this code when a form is submitted to 'did-audit-find-issues'
 router.post('/did-audit-find-issues-answer', function (req, res) {
 
