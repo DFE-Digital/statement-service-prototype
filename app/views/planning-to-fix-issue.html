@@ -17,24 +17,8 @@
     <div class="govuk-grid-column-two-thirds">
       <form class="form" action="/planning-to-fix-issue-answer" method="post">
 
-        <p>
+        
           {% from "govuk/components/radios/macro.njk" import govukRadios %}
-          {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
-
-          {% set noHtml %}
-        {{ govukTextarea({
-          id: "no",
-          name: "no",
-          type: "text",
-          spellcheck: false,
-          label: {
-            text: "Why are you not fixing this issue?"
-          },
-          hint: {
-            text: "Provide as much detail as possible"
-          }
-        }) }}
-        {% endset -%}
 
           {{ govukRadios({
             name: "planning-to-fix-issue",
@@ -54,14 +38,11 @@
               },
               {
                 value: "No",
-                text: "No",
-                conditional: {
-                  html: noHtml
-                }
+                text: "No"
               }
             ]
           }) }}
-        </p>
+        
 
         {{ govukButton({
           text: "Continue"
