@@ -27,21 +27,18 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
   })
 
   // Run this code when a form is submitted to '/planning-to-fix-issues'
-    router.post('/planning-to-fix-issues-answer', function (req, res) {
+    router.post('/planning-to-fix-issue-answer', function (req, res) {
 
     // Make a variable and give it the value from 'how-many-balls'
-    var planningToFixIssues = req.session.data['planning-to-fix-issues']
+    var planningToFixIssue = req.session.data['planning-to-fix-issue']
   
     // Check whether the variable matches a condition
-    if (planningToFixIssues == "All"){
+    if (planningToFixIssue == "Yes"){
       // Send user to next page
-      res.redirect('/fix-issues')
+      res.redirect('/fix-issue')
     } 
-    else if (planningToFixIssues == "Some"){
-        res.redirect('/fix-issues')
-    } 
-    else if (planningToFixIssues == "None"){
-        res.redirect('/disproportionate-burden')
+    else if (planningToFixIssue == "No"){
+        res.redirect('/fix-issue')
 
     } else {
       // Send user to ineligible page

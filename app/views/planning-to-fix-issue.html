@@ -20,17 +20,17 @@
         
       </h1>
 
-      <form class="form" action="/planning-to-fix-issues-answer" method="post">
+      <form class="form" action="/planning-to-fix-issue-answer" method="post">
 
         <p>
           {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
           {{ govukRadios({
-            name: "planning-to-fix-issues",
-            value: data['planning-to-fix-issues'],
+            name: "planning-to-fix-issue",
+            value: data['planning-to-fix-issue'],
             fieldset: {
               legend: {
-                text: "Are you planning to fix the issues?",
+                text: "Are you planning to fix this issue?",
 
                 isPageHeading: true,
                 classes: "govuk-fieldset__legend--l"
@@ -38,16 +38,12 @@
             },
             items: [
               {
-                value: "All",
-                text: "All"
+                value: "Yes",
+                text: "Yes"
               },
               {
-                value: "Some",
-                text: "Some"
-              },
-              {
-                value: "None",
-                text: "None"
+                value: "No",
+                text: "No"
               }
             ]
           }) }}
