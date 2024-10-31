@@ -25,7 +25,6 @@
             namePrefix: "audit-date",
             name: "auditDate",
             fieldset: {
-              value: {day: audit-date-day,month: audit-date-month,year: audit-date-year},
               legend: {
                 text: "When was the audit completed?",
                 isPageHeading: true,
@@ -34,7 +33,10 @@
             },
             hint: {
               text: "For example, 20 07 2018"
-            }
+            },
+            items: [ { classes: "govuk-input--width-2",name: "day", value: data['audit-date-day'] | default('') }, 
+            {classes: "govuk-input--width-2", name: "month", value: data['audit-date-month'] | default('') }, 
+            { classes: "govuk-input--width-4", name: "year", value: data['audit-date-year'] | default('') } ]
           }) }}
 
         {{ govukButton({
