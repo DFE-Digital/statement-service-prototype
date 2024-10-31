@@ -35,14 +35,46 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
     // Check whether the variable matches a condition
     if (planningToFixIssue == "Yes"){
       // Send user to next page
-      res.redirect('/fix-issue')
+      res.redirect('/how-fix-issue')
     } 
     else if (planningToFixIssue == "No"){
-        res.redirect('/fix-issue')
+        res.redirect('/how-fix-issue')
 
     } else {
       // Send user to ineligible page
       res.redirect('/temp-error-page')
     }
   
+  })
+
+
+
+    router.post('/how-fix-issue-answer', function (req, res) {
+      // Check if the session data exists
+      if (!req.session.data) {
+        req.session.data = {};
+    }
+
+    // Initialize approved products array if it doesn't exist
+    if (!req.session.data.approvedProducts) {
+        req.session.data.approvedProducts = [];
+    }
+
+    // Get the submitted data from the request session
+const approvedProduct = {
+        id: generateRandomId(),
+        principle: req.session.data['approved-name'],
+        criteria: req.session.data['approved-vendor'],
+        fixIssueYN: req.session.data['approved-version'],
+        howFixIssue: req.session.data['approved-usecase'],
+        whyNotFixIssue: req.session.data['approved-usecase']
+    };
+
+    // Push the new approved product to the session array
+    req.session.data.approvedProducts.push(approvedProduct);
+
+    console.log(req.session.data.approvedProducts); // For debugging
+
+    // Redirect to the next page or back to the products page
+    return res.redirect('/create/standard/products');
   })
