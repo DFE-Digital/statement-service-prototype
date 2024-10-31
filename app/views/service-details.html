@@ -21,50 +21,48 @@
       </h1>
 
       <form class="form" action="/audit-date" method="post">
-
-        <p>
           {% from "govuk/components/input/macro.njk" import govukInput %}
 
-{{ govukInput({
-  label: {
-    text: "What is the name of the service?",
-    classes: "govuk-label--2",
-    isPageHeading: false
-  },
-  id: "service-name",
-  name: "serviceName"
-}) }}{% from "govuk/components/input/macro.njk" import govukInput %}
+          {{ govukInput({
+            label: {
+              text: "What is the name of the service?",
+              classes: "govuk-label--2",
+              isPageHeading: false
+            },
+            id: "service-name",
+            name: "serviceName"
+          }) }}
 
-{{ govukInput({
-  label: {
-    text: "What is the name of team that manages the service?",
-    classes: "govuk-label--2",
-    isPageHeading: true
-  },
-  id: "team-name",
-  name: "teamName"
-}) }}{% from "govuk/components/input/macro.njk" import govukInput %}
+          {{ govukInput({
+            label: {
+              text: "What is the name of team that manages the service?",
+              classes: "govuk-label--2",
+              isPageHeading: true
+            },
+            id: "team-name",
+            name: "teamName"
+          }) }}
 
-{{ govukInput({
-  label: {
-    text: "What is the name of the product manager or responsible officer?",
-    classes: "govuk-label--2",
-    isPageHeading: true
-  },
-  id: "pm-ro-name",
-  name: "pmRoName"
-}) }}{% from "govuk/components/input/macro.njk" import govukInput %}
+          {{ govukInput({
+            label: {
+              text: "What is the name of the product manager or responsible officer?",
+              classes: "govuk-label--2",
+              isPageHeading: true
+            },
+            id: "pm-ro-name",
+            name: "pmRoName"
+          }) }}
 
-{{ govukInput({
-  label: {
-    text: "What is the contact email for the team?",
-    classes: "govuk-label--2",
-    isPageHeading: true
-  },
-  id: "team-email",
-  name: "teamEmail"
-}) }}
-        </p>
+          {{ govukInput({
+            label: {
+              text: "What is the contact email for the team?",
+              classes: "govuk-label--2",
+              isPageHeading: true
+            },
+            id: "team-email",
+            name: "teamEmail"
+          }) }}
+        
 
         {{ govukButton({
           text: "Continue"
