@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
-  {{ govukBackLink({
+{{ govukBackLink({
   text: "Back",
   href: "javascript:window.history.back()"
 }) }}
@@ -13,28 +13,40 @@
 
 {% block content %}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        Heading or question goes here
-      </h1>
+    <form class="form" action="/wcag-specific-issues-answer" method="post">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Select the WCAG criteria that has not been met
+            </h1>
+          </legend>
+          <div class="govuk-radios" data-module="govuk-radios">
 
-      <form class="form" action="/path/of/next/page" method="post">
+            {%for criteria in criterion%}
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="wcag-criteria-{{loop.index}}" name="wcag-criteria" type="radio"
+                value="{{criteria.reference}}">
+              <label class="govuk-label govuk-radios__label" for="wcag-criteria-{{loop.index}}">
+                {{criteria.criteria}} ({{criteria.level}})
 
-        <p>
-          [Insert question content here - see the
-          <a href="https://design-system.service.gov.uk">GOV.UK Design System</a>
-          for examples]
-        </p>
+              </label>
+            </div>
+            {%endfor%}
+          </div>
+        </fieldset>
+      </div>
 
-        {{ govukButton({
+      {{ govukButton({
           text: "Continue"
         }) }}
 
-      </form>
+    </form>
 
-    </div>
   </div>
+</div>
 
 {% endblock %}

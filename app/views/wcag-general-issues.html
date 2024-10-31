@@ -1,11 +1,11 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
-  {{ govukBackLink({
+{{ govukBackLink({
   text: "Back",
   href: "javascript:window.history.back()"
 }) }}
@@ -13,20 +13,20 @@
 
 {% block content %}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        Select the WCAG criteria that has not been met
-      </h1>
+    <h1 class="govuk-heading-l">
+      Select the WCAG criteria that has not been met
+    </h1>
 
-      <form class="form" action="/path/of/next/page" method="post">
+    <form class="form" action="/wcag-general-issues-answer" method="post">
 
-        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+      {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
-{{ govukRadios({
-  name: "POUR-selection",
-  value: data['POUR-selection'],
+      {{ govukRadios({
+  name: "pour-selection",
+  value: data['pour-selection'],
   fieldset: {
     legend: {
       isPageHeading: true,
@@ -53,13 +53,13 @@
   ]
 }) }}
 
-        {{ govukButton({
+      {{ govukButton({
           text: "Continue"
         }) }}
 
-      </form>
+    </form>
 
-    </div>
   </div>
+</div>
 
 {% endblock %}
