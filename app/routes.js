@@ -101,9 +101,24 @@ router.post('/how-fix-issue-answer', function (req, res) {
   // Push the new approved product to the session array
   req.session.data.approvedProducts.push(approvedProduct);
 
+  //clearing session data
+  req.session.data['pour-selection'] = ""
+  req.session.data['wcag-criteria'] = ""
+  req.session.data['planning-to-fix-issue'] = ""
+  req.session.data['how-fix-issue'] = ""
+  req.session.data['no-fix-issue'] = ""
+
   console.log(req.session.data.approvedProducts); // For debugging
 
   // Redirect to the next page or back to the products page
   return res.redirect('/create/standard/products');
 })
 
+
+router.get('/list-of-users-wcag-issues', function (req, res) {
+let listOfIssues = []
+if (req.session.data.approvedProducts) {
+  listOfIssues = req.session.data.approvedProducts;
+}
+return res.render('list-of-users-wcag-issues', {listOfIssues})
+})
