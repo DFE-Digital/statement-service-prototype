@@ -104,7 +104,7 @@ router.post('/how-fix-issue-answer', function (req, res) {
     criteria: req.session.data['wcag-criteria'],
     fixIssueYN: req.session.data['planning-to-fix-issue'],
     howFixIssue: req.session.data['how-fix-issue'],
-    whyNotFixIssue: req.session.data['no-fix-issue']
+    whyNotFixIssue: req.session.data['no-fix-issue'],
   };
 
   // Push the new approved product to the session array
