@@ -124,10 +124,10 @@ router.post('/how-fix-issue-answer', function (req, res) {
 })
 
 
-router.get('/summarylist-of-users-wcag-issues', function (req, res) {
+router.get('/table-of-users-wcag-issues', function (req, res) {
 let listOfIssues = []
 if (req.session.data.approvedProducts) {
   listOfIssues = req.session.data.approvedProducts;
 }
-return res.render('/summarylist-of-users-wcag-issues', {listOfIssues})
+return res.render('/table-of-users-wcag-issues', {listOfIssues})
 })
