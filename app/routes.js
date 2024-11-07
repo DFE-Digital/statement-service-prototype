@@ -54,7 +54,7 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
   // Check whether the variable matches a condition
   if (didAuditFindIssues == "yes") {
     // Send user to next page
-    res.redirect('/WCAG-fails')
+    res.redirect('/wcag-general-issues')
   } else if (didAuditFindIssues == "no") {
     res.redirect('/contact-information')
   } else {
@@ -75,7 +75,7 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
     // Send user to next page
     res.redirect('/how-fix-issue')
   } else if (planningToFixIssue == "No") {
-    res.redirect('/how-fix-issue')
+    res.redirect('/disproportionate-burden')
 
   } else {
     // Send user to ineligible page
