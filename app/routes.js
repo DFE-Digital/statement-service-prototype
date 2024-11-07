@@ -129,5 +129,5 @@ let listOfIssues = []
 if (req.session.data.approvedProducts) {
   listOfIssues = req.session.data.approvedProducts;
 }
-return res.render('summarylist-of-users-wcag-issues', {listOfIssues})
+return res.render('/summarylist-of-users-wcag-issues', {listOfIssues})
 })
