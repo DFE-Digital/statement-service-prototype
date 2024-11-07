@@ -5,12 +5,14 @@
 {% endblock %}
 
 {% block content %}
+<h1>List of issues</h1>
+<p><a href = "/wcag-general-issues">add an issue</a></p>
 
+{%if listOfIssues|length>0%}
 <table class="govuk-table">
-  <caption class="govuk-table__caption govuk-table__caption--m">List of issues</caption>
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header">issue amount</th>
+
       <th scope="col" class="govuk-table__header">Issue</th>
       <th scope="col" class="govuk-table__header">Criteria</th>
       <th scope="col" class="govuk-table__header">Are fix issue</th>
@@ -18,14 +20,31 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
+    {% for issue in listOfIssues %}
     <tr class="govuk-table__row">
-      <th scope="row" class="govuk-table__header">issue 1</th>
-      <td class="govuk-table__cell">{{pour-selection}}</td>
-      <td class="govuk-table__cell">{{pour-selection}}</td>
-      <td class="govuk-table__cell">{{pour-selection}}</td>
-      <td class="govuk-table__cell">{{pour-selection}}</td>
+      <td class="govuk-table__cell">{{issue.principle}}</td>
+      <td class="govuk-table__cell">{{issue.criteria}}</td>
+      <td class="govuk-table__cell">{{issue.fixIssueYN}}</td>
+      <td class="govuk-table__cell">{% if issue.fixIssueYN === "Yes" %} 
+        {{issue.howFixIssue|truncate(100)}} 
+        {% else %} 
+        {{issue.whyNotFixIssue|truncate(100)}} 
+        {% endif %}
+      </td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
+{%else%}
+<p>no issues added</p>
+{%endif%}
+
+{{listOfIssues|dump}}
+
+<form action = "/contact-information" method = "get">
+{{ govukButton({
+  text: "Continue"
+}) }}
+</form>
 
 {% endblock %}

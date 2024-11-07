@@ -31,13 +31,10 @@ router.get('/wcag-specific-issues', function (req, res) {
     return res.redirect('wcag-general-issues')
   }
 
-
-
 })
 
 //
 router.post('/wcag-general-issues-answer', function (req, res) {
-
 
     res.redirect('/wcag-specific-issues')
 
@@ -75,7 +72,7 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
     // Send user to next page
     res.redirect('/how-fix-issue')
   } else if (planningToFixIssue == "No") {
-    res.redirect('/disproportionate-burden')
+    res.redirect('/why-no-fix-issue')
 
   } else {
     // Send user to ineligible page
@@ -93,41 +90,88 @@ router.post('/how-fix-issue-answer', function (req, res) {
   }
 
   // Initialize approved products array if it doesn't exist
-  if (!req.session.data.approvedProducts) {
-    req.session.data.approvedProducts = [];
+  if (!req.session.data.issues) {
+    req.session.data.issues = [];
   }
-
+try{
   // Get the submitted data from the request session
-  const approvedProduct = {
+  const issue = {
     id: generateRandomId(),
     principle: req.session.data['pour-selection'],
     criteria: req.session.data['wcag-criteria'],
     fixIssueYN: req.session.data['planning-to-fix-issue'],
-    howFixIssue: req.session.data['how-fix-issue'],
-    whyNotFixIssue: req.session.data['no-fix-issue'],
+    howFixIssue: req.session.data['how-fix-issue']
   };
 
   // Push the new approved product to the session array
-  req.session.data.approvedProducts.push(approvedProduct);
+  req.session.data.issues.push(issue);
+
+  console.log(issue)
+
 
   //clearing session data
   req.session.data['pour-selection'] = ""
   req.session.data['wcag-criteria'] = ""
   req.session.data['planning-to-fix-issue'] = ""
   req.session.data['how-fix-issue'] = ""
+
+  console.log(req.session.data.issues); // For debugging
+}catch(error){
+  console.log(error)
+}
+  // Redirect to the next page or back to the products page
+  return res.redirect('/table-of-users-wcag-issues');
+})
+
+
+
+
+router.post('/why-no-fix-issue-answer', function (req, res) {
+  // Check if the session data exists
+  if (!req.session.data) {
+    req.session.data = {};
+  }
+
+  // Initialize approved products array if it doesn't exist
+  if (!req.session.data.issues) {
+    req.session.data.issues = [];
+  }
+try{
+  // Get the submitted data from the request session
+  const issue = {
+    id: generateRandomId(),
+    principle: req.session.data['pour-selection'],
+    criteria: req.session.data['wcag-criteria'],
+    fixIssueYN: req.session.data['planning-to-fix-issue'],
+    whyNotFixIssue: req.session.data['no-fix-issue']
+  };
+
+  // Push the new approved product to the session array
+  req.session.data.issues.push(issue);
+
+  console.log(issue)
+
+
+  //clearing session data
+  req.session.data['pour-selection'] = ""
+  req.session.data['wcag-criteria'] = ""
+  req.session.data['planning-to-fix-issue'] = ""
   req.session.data['no-fix-issue'] = ""
 
-  console.log(req.session.data.approvedProducts); // For debugging
-
+  console.log(req.session.data.issues); // For debugging
+}catch(error){
+  console.log(error)
+}
   // Redirect to the next page or back to the products page
-  return res.redirect('/create/standard/products');
+  return res.redirect('/table-of-users-wcag-issues');
 })
 
 
 router.get('/table-of-users-wcag-issues', function (req, res) {
 let listOfIssues = []
-if (req.session.data.approvedProducts) {
-  listOfIssues = req.session.data.approvedProducts;
+if (req.session.data.issues) {
+  listOfIssues = req.session.data.issues;
 }
 return res.render('/table-of-users-wcag-issues', {listOfIssues})
 })
+

@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block content %}
-<h1 class = "govuk-heading-xl">
-  list of issues
-</h1>
+<h1>List of issues</h1>
+<p><a href = "/wcag-general-issues">add an issue</a></p>
+
+{%if listOfIssues|length>0%}
+
 <div class="govuk-summary-card">
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
@@ -21,21 +23,22 @@
   </div>
   <div class="govuk-summary-card__content">
     <dl class="govuk-summary-list">
+      {% for issue in listOfIssues %}
       <div class="govuk-summary-list__row">
+        
         <dt class="govuk-summary-list__key">
           principle
         </dt>
         <dd class="govuk-summary-list__value">
-          {{pour-selection}}
+          {{issue.principle}}
         </dd>
-       
       </div>
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
         wcag-criteria
         </dt>
         <dd class="govuk-summary-list__value">
-          {{wcag-criteria}}
+          {{issue.criteria}}
         </dd>
       </div>
       <div class="govuk-summary-list__row">
@@ -43,18 +46,32 @@
         fix issues
         </dt>
         <dd class="govuk-summary-list__value">
-          {{planning-to-fix-issue}}
+          {{issue.fixIssueYN}}
         </dd>
       </div>
+      {% if issue.fixIssueYN === "Yes" %} 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-        how fixing/ why not fixing
+        How are you fixing this issue
         </dt>
         <dd class="govuk-summary-list__value">
-          {{how-fix-issue}}
+          {{issue.howFixIssue}}
         </dd>
       </div>
+        {% else %} 
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+          Why are you not fixing the issue?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{issue.whyNotFixIssue}}
+          </dd>
+        </div>
+        {% endif %}
+      {% endfor %}
     </dl>
   </div>
 </div>
+{%endif%}
+{{listOfIssues|dump}}
 {% endblock %}
