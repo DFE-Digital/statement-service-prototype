@@ -39,25 +39,13 @@
 
       <form class="form" action="/did-audit-find-issues-answer" method="post">
 
-        {% from "govuk/components/radios/macro.njk" import govukRadios %}
-
-          <div class="govuk-form-group {% if errors | length %} govuk-form-group--error{%endif%}">
+          <div class="govuk-form-group">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                 <h1 class="govuk-fieldset__heading">
                   Did the audit find any accessibility issues?
                 </h1>
               </legend>
-              {% if errors | length %}
-              {% for error in errors %}
-              {% if error.id == 'did-audit-find-issues' %}
-              <p id="did-audit-find-issues" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
-              </p>
-              {% endif %}
-              {% endfor %}
-             
-              {% endif %}
 
               <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
@@ -67,7 +55,7 @@
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="did-audit-find-issues-2" name="did-audit-find-issues" type="radio" value="No" {{ checked('did-audit-find-issues','Yes') }}>
+                  <input class="govuk-radios__input" id="did-audit-find-issues-2" name="did-audit-find-issues" type="radio" value="no">
                   <label class="govuk-label govuk-radios__label" for="did-audit-find-issues-2">
                     No
                   </label>
@@ -75,14 +63,12 @@
               </div>
             </fieldset>
           </div>
-        
 
         {{ govukButton({
           text: "Continue"
         }) }}
 
       </form>
-
     </div>
   </div>
 
