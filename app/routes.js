@@ -42,6 +42,36 @@ router.post('/wcag-general-issues-answer', function (req, res) {
 })
 
 
+
+router.post('/name-audit-answer', function (req, res) {
+
+  var nameAudit = req.session.data['name-audit']
+
+   let errors = [];
+
+  if(nameAudit === undefined)
+  {
+    let error = {
+      id: 'name-audit',
+      message: 'Enter the person who created the audit'
+    }
+
+    errors.push(error);
+  }
+
+
+  if(errors.length)
+  {
+    return res.render('name-audit', {errors})
+  }
+
+  if(nameAudit !== ""){
+    res.redirect('/index')
+  }
+    
+})
+
+
 // Run this code when a form is submitted to 'did-audit-find-issues'
 router.post('/did-audit-find-issues-answer', function (req, res) {
 
@@ -111,37 +141,6 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
 
 })
 
-router.post('/name-audit-answer'), function (req, res) {
-
-  var nameAudit = req.session.data['name-audit']
-
-   let errors = [];
-
-  if(nameAudit === undefined)
-  {
-    let error = {
-      id: 'name-audit',
-      message: 'Enter the person who created the audit'
-    }
-
-    errors.push(error);
-  }
-
-
-  if(errors.length)
-  {
-    return res.render('name-audit', {errors})
-  }
-
-  if(nameAudit == "y"){
-    res.redirect('/index')
-  }
-  else
-  {
-    res.redirect('/service-details')
-  }
-    
-}
 
 
 

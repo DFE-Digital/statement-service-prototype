@@ -36,10 +36,9 @@
       </div>
       {% endif %}
 
-      <form class="form" action="/name-audit-answer" method="post">
+     <form method="post" action="/name-audit-answer">
 
-        {% from "govuk/components/input/macro.njk" import govukInput %}
-
+      
         <div class="govuk-form-group {% if errors | length %} govuk-form-group--error{%endif%}">
           <h1 class="govuk-label-wrapper">
             <label class="govuk-label govuk-label--l" for="name-audit">
@@ -48,8 +47,8 @@
           </h1>
           {% if errors | length %}
           {% for error in errors %}
-          {% if error.id == 'did-audit-find-issues' %}
-          <p id="did-audit-find-issues" class="govuk-error-message">
+          {% if error.id == 'name-audit' %}
+          <p id="name-audit" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> {{error.message}}
           </p>
           {% endif %}
@@ -64,7 +63,8 @@
         }) }}
       </form>
 
+   
+
     </div>
   </div>
-  {{name-aduit|dump}}
 {% endblock %}
