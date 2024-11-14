@@ -15,38 +15,33 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
-
       <form class="form" action="/did-audit-find-issues-answer" method="post">
 
-        <p>
-          {% from "govuk/components/radios/macro.njk" import govukRadios %}
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <h1 class="govuk-fieldset__heading">
+                  Did the audit find any accessibility issues?
+                </h1>
+              </legend>
 
-          {{ govukRadios({
-            name: "did-audit-find-issues",
-            value: data['did-audit-find-issues'],
-            fieldset: {
-              legend: {
-                text: "Did the audit find any accessibility issues?",
-                isPageHeading: true,
-                classes: "govuk-fieldset__legend--l"
-              }
-            },
-            hint: {
-              text: "Select one option"
-            },
-            items: [
-              {
-                value: "yes",
-                text: "Yes"
-              },
-              {
-                value: "no",
-                text: "No"
-              }
-            ]
-          }) }}
-        </p>
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="did-audit-find-issues" name="did-audit-find-issues" type="radio" value="yes">
+                  <label class="govuk-label govuk-radios__label" for="did-audit-find-issues">
+                    Yes
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="did-audit-find-issues-2" name="did-audit-find-issues" type="radio" value="no">
+                  <label class="govuk-label govuk-radios__label" for="did-audit-find-issues-2">
+                    No
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        
 
         {{ govukButton({
           text: "Continue"
