@@ -64,8 +64,28 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
 // Run this code when a form is submitted to '/planning-to-fix-issues'
 router.post('/planning-to-fix-issue-answer', function (req, res) {
 
-  // Make a variable and give it the value from 'how-many-balls'
   var planningToFixIssue = req.session.data['planning-to-fix-issue']
+
+  let errors = [];
+
+  if(planningToFixIssue === undefined)
+  {
+    let error = {
+      id: 'planning-to-fix-issue',
+      message: 'Select an option'
+    }
+
+    errors.push(error);
+  }
+
+
+  if(errors.length)
+  {
+    return res.render('planning-to-fix-issue', {errors})
+  }
+
+  // Make a variable and give it the value from 'how-many-balls'
+
 
   // Check whether the variable matches a condition
   if (planningToFixIssue == "Yes") {
@@ -74,10 +94,7 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
   } else if (planningToFixIssue == "No") {
     res.redirect('/why-no-fix-issue')
 
-  } else {
-    // Send user to ineligible page
-    res.redirect('/temp-error-page')
-  }
+    }
 
 })
 
