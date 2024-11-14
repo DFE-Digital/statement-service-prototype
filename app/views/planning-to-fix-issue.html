@@ -15,12 +15,34 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
+      {% if errors | length %}
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% for error in errors %}
+              <li>
+                <a href="#{{error.id}}">{{error.message}}</a>
+              </li>
+              {% endfor %}
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+
       <form class="form" action="/planning-to-fix-issue-answer" method="post">
 
         
           {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
-          {{ govukRadios({
+          <!-- {{ govukRadios({
             name: "planning-to-fix-issue",
             value: data['planning-to-fix-issue'],
             fieldset: {
@@ -41,7 +63,42 @@
                 text: "No"
               }
             ]
-          }) }}
+          }) }} -->
+
+          <div class="govuk-form-group  {% if errors | length %} govuk-form-group--error{%endif%}">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <h1 class="govuk-fieldset__heading">
+                  Are you planning to fix this issue?
+                </h1>
+              </legend>
+              {% if errors | length %}
+              {% for error in errors %}
+              {% if error.id == 'planning-to-fix-issue' %}
+              <p id="planning-to-fix-issue-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% endfor %}
+             
+              {% endif %}
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="planning-to-fix-issue" name="planning-to-fix-issue" type="radio" value="Yes" {{ checked('planning-to-fix','Yes') }}>
+                  <label class="govuk-label govuk-radios__label" for="planning-to-fix-issue">
+                    Yes
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="planning-to-fix-issue-2" name="planning-to-fix-issue" type="radio" value="No" {{ checked('planning-to-fix','No') }}>
+                  <label class="govuk-label govuk-radios__label" for="planning-to-fix-issue-2">
+                    No
+                  </label>
+                </div>
+              
+              </div>
+            </fieldset>
+          </div>
         
 
         {{ govukButton({
