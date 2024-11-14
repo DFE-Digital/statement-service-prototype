@@ -24,18 +24,30 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
               Select the WCAG criteria that has not been met
             </h1>
           </legend>
-          <div class="govuk-radios" data-module="govuk-radios">
 
+          <!-- Error message -->
+          {% if errors | length %}
+          {% for error in errors %}
+          {% if error.id == 'wcag-specific-issues' %}
+          <p id="wcag-specific-issues-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+          </p>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+
+          <div class="govuk-radios" data-module="govuk-radios">
+            
             {%for criteria in criterion%}
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="wcag-criteria-{{loop.index}}" name="wcag-criteria" type="radio"
                 value="{{criteria.reference}}">
               <label class="govuk-label govuk-radios__label" for="wcag-criteria-{{loop.index}}">
                 {{criteria.criteria}} ({{criteria.level}})
-
               </label>
             </div>
             {%endfor%}
+
           </div>
         </fieldset>
       </div>

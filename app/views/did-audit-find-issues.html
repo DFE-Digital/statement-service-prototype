@@ -25,6 +25,17 @@
                 </h1>
               </legend>
 
+              <!-- Error message -->
+              {% if errors | length %}
+              {% for error in errors %}
+              {% if error.id == 'did-audit-find-issues' %}
+              <p id="did-audit-find-issues-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
               <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
                   <input class="govuk-radios__input" id="did-audit-find-issues" name="did-audit-find-issues" type="radio" value="yes">
