@@ -15,9 +15,9 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-
     <form class="form" action="/planning-to-fix-issue" method="post">
-      <div class="govuk-form-group">
+
+      <div class="govuk-form-group {% if errors | length %} govuk-form-group--error{%endif%}">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 class="govuk-fieldset__heading">
@@ -37,7 +37,7 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
           {% endif %}
 
           <div class="govuk-radios" data-module="govuk-radios">
-            
+
             {%for criteria in criterion%}
             <div class="govuk-radios__item">
               <input class="govuk-radios__input" id="wcag-criteria-{{loop.index}}" name="wcag-criteria" type="radio"
@@ -57,7 +57,6 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
         }) }}
 
     </form>
-
   </div>
 </div>
 
