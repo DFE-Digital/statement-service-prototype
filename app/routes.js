@@ -48,18 +48,35 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
   // Make a variable and give it the value from 'did-audit-find-issues'
   var didAuditFindIssues = req.session.data['did-audit-find-issues']
 
+  let errors = [];
+
+  if( didAuditFindIssues === undefined)
+  {
+    let error = {
+      id: 'did-audit-find-issues',
+      message: 'Select an option'
+    }
+
+    errors.push(error);
+  }
+
+
+  if(errors.length)
+  {
+    return res.render('did-audit-find-issues', {errors})
+  }
+
   // Check whether the variable matches a condition
-  if (didAuditFindIssues == "yes") {
+  if (didAuditFindIssues == "Yes") {
     // Send user to next page
     res.redirect('/wcag-general-issues')
-  } else if (didAuditFindIssues == "no") {
+  } else if (didAuditFindIssues == "No") {
     res.redirect('/contact-information')
-  } else {
-    // Send user to ineligible page
-    res.redirect('/temp-error-page')
   }
 
 })
+
+
 
 // Run this code when a form is submitted to '/planning-to-fix-issues'
 router.post('/planning-to-fix-issue-answer', function (req, res) {

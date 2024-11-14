@@ -15,25 +15,59 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
+      {% if errors | length %}
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% for error in errors %}
+              <li>
+                <a href="#{{error.id}}">{{error.message}}</a>
+              </li>
+              {% endfor %}
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+
       <form class="form" action="/did-audit-find-issues-answer" method="post">
 
-          <div class="govuk-form-group">
+        {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+          <div class="govuk-form-group {% if errors | length %} govuk-form-group--error{%endif%}">
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                 <h1 class="govuk-fieldset__heading">
                   Did the audit find any accessibility issues?
                 </h1>
               </legend>
+              {% if errors | length %}
+              {% for error in errors %}
+              {% if error.id == 'did-audit-find-issues' %}
+              <p id="did-audit-find-issues" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% endfor %}
+             
+              {% endif %}
 
               <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="did-audit-find-issues" name="did-audit-find-issues" type="radio" value="yes">
+                  <input class="govuk-radios__input" id="did-audit-find-issues" name="did-audit-find-issues" type="radio" value="Yes" {{ checked('did-audit-find-issues','Yes') }}>
                   <label class="govuk-label govuk-radios__label" for="did-audit-find-issues">
                     Yes
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="did-audit-find-issues-2" name="did-audit-find-issues" type="radio" value="no">
+                  <input class="govuk-radios__input" id="did-audit-find-issues-2" name="did-audit-find-issues" type="radio" value="No" {{ checked('did-audit-find-issues','Yes') }}>
                   <label class="govuk-label govuk-radios__label" for="did-audit-find-issues-2">
                     No
                   </label>
