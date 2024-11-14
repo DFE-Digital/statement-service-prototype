@@ -1,0 +1,56 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form class="form" action="/planning-to-fix-issue" method="post">
+      <div class="govuk-form-group govuk-form-group--error">
+        <fieldset class="govuk-fieldset" aria-describedby="wcag-specific-error">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Select the WCAG criteria that has not been met
+            </h1>
+          </legend>
+          <p id="wcag-specific-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Select a WCAG criteria
+          </p>
+          <div class="govuk-radios" data-module="govuk-radios">
+
+            {%for criteria in criterion%}
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="wcag-criteria-{{loop.index}}" name="wcag-criteria" type="radio"
+                value="{{criteria.reference}}">
+              <label class="govuk-label govuk-radios__label" for="wcag-criteria-{{loop.index}}">
+                {{criteria.criteria}} ({{criteria.level}})
+
+              </label>
+            </div>
+            {%endfor%}
+            
+          </div>
+        </fieldset>
+      </div>
+
+      {{ govukButton({
+          text: "Continue"
+        }) }}
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
