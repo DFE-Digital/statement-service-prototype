@@ -47,9 +47,10 @@ router.post('/name-audit-answer', function (req, res) {
 
   var nameAudit = req.session.data['name-audit']
 
-   let errors = [];
+  console.log(nameAudit)
+  let errors = [];
 
-  if(nameAudit === undefined)
+  if(nameAudit === "")
   {
     let error = {
       id: 'name-audit',
@@ -58,6 +59,7 @@ router.post('/name-audit-answer', function (req, res) {
 
     errors.push(error);
   }
+  console.log(errors)
 
 
   if(errors.length)
@@ -65,8 +67,8 @@ router.post('/name-audit-answer', function (req, res) {
     return res.render('name-audit', {errors})
   }
 
-  if(nameAudit !== ""){
-    res.redirect('/index')
+  if(nameAudit !== undefined){
+    res.redirect('/did-audit-find-issues')
   }
     
 })
