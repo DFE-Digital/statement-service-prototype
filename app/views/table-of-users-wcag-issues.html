@@ -6,7 +6,7 @@
 
 {% block content %}
 <h1>List of issues</h1>
-<p><a href = "/wcag-general-issues">add an issue</a></p>
+<p><a href = "/pour-selection">add an issue</a></p>
 
 {%if listOfIssues|length>0%}
 <table class="govuk-table">
@@ -39,7 +39,7 @@
 <p>no issues added</p>
 {%endif%}
 
-{{listOfIssues|dump}}
+<!--{{listOfIssues|dump}}-->
 
 <form action = "/contact-information" method = "get">
 {{ govukButton({

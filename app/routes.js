@@ -28,16 +28,36 @@ router.get('/wcag-specific-issues', function (req, res) {
     console.log(filteredData)
     return res.render('wcag-specific-issues', {criterion:filteredData})
   } else {
-    return res.redirect('wcag-general-issues')
+    return res.redirect('pour-selection')
   }
 
 })
 
 //
-router.post('/wcag-general-issues-answer', function (req, res) {
+router.post('/pour-selection-answer', function (req, res) {
 
-    res.redirect('/wcag-specific-issues')
+  var genissues = req.session.data['pour-selection']
 
+    let errors = [];
+
+  if (genissues === undefined)
+  {
+    let error = {
+      id: 'pour-selection',
+      message: 'Select a criteria that has not been met'
+    }
+
+    errors.push(error);
+  }
+
+    if(errors.length)
+    {
+      return res.render('pour-selection', {errors})
+    }
+
+    if(genissues !== undefined){
+      res.redirect('/wcag-specific-issues')
+    }
 
 })
 
@@ -101,7 +121,7 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
   // Check whether the variable matches a condition
   if (didAuditFindIssues == "Yes") {
     // Send user to next page
-    res.redirect('/wcag-general-issues')
+    res.redirect('/pour-selection')
   } else if (didAuditFindIssues == "No") {
     res.redirect('/contact-information')
   }

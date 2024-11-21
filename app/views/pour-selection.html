@@ -1,0 +1,100 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if errors | length %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            {% for error in errors %}
+            <li>
+              <a href="#{{error.id}}">{{error.message}}</a>
+            </li>
+            {% endfor %}
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <form class="form" action="/pour-selection-answer" method="post">
+
+      {% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+      <div class="govuk-form-group  {% if errors | length %} govuk-form-group--error{%endif%}">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              select the WCAG criteria that has not been met
+              </h1>
+              </legend>
+              {% if errors | length %}
+              {% for error in errors %}
+              {% if error.id == 'planning-to-fix-issue' %}
+              <p id="pour-selection" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% endfor %}
+            
+              {% endif %}
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Perceivable" {{ checked('pour-selection','Perceivable') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                    1. Perceivable
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Operable" {{ checked('pour-selection','Operable') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                    2. Operable
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Understandable" {{ checked('pour-selection','Understandable') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                      3. Understandable
+                  </label>
+                  </div>
+                  <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Robust" {{ checked('pour-selection','Robust') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                    4. Robust
+                  </label>
+                </div>
+
+              </div>
+            </fieldset>
+          </div>
+
+    {{ govukButton({
+      text: "Continue"
+    }) }}
+
+  </form>
+
+</div>
+</div>
+
+
+{% endblock %}
