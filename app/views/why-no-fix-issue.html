@@ -17,25 +17,52 @@
     <div class="govuk-grid-column-two-thirds">
       <form class="form" action="/why-no-fix-issue-answer" method="post">
 
-        {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+        {% if errors | length %}
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% for error in errors %}
+              <li>
+                <a href="#{{error.id}}">{{error.message}}</a>
+              </li>
+              {% endfor %}
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
 
-        {{ govukTextarea({
-          name: "no-fix-issue",
-          value: data['no-fix-issue'],
-          label: {
-            text: "Why are you not fixing the issue?",
-            classes: "govuk-label--l",
-            isPageHeading: true
-          },
-          hint: {
-            text: "Provide as much detail as possible"
-          }
-        }) }}
+        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+          <h1 class="govuk-label-wrapper">
+            <label class="govuk-label govuk-label--l" for="more-detail">
+              Why are you not fixing the issue?
+            </label>
+          </h1>
+          {% if errors | length %}
+              {% for error in errors %}
+              {% if error.id == 'why-no-fix-issue' %}
+              <p id="why-no-fix-issue-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+          <div id="why-no-fix-issue-hint" class="govuk-hint">
+            Provide as much detail as possible
+          </div>
+          <textarea class="govuk-textarea" id="why-no-fix-issue" name="why-no-fix-issue" rows="5" aria-describedby="more-detail-hint"></textarea>
+        </div>
 
         {{ govukButton({
           text: "Continue"
         }) }}
-
+        
       </form>
 
     </div>

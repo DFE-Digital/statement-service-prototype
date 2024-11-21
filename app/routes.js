@@ -94,6 +94,35 @@ router.post('/name-audit-answer', function (req, res) {
 })
 
 
+router.post('/why-no-fix-issue-answer', function (req, res) {
+
+  var whyNoFixIssue = req.session.data['why-no-fix-issue']
+
+  let errors = [];
+
+  if(whyNoFixIssue === "")
+  {
+    let error = {
+      id: 'why-no-fix-issue',
+      message: 'Enter why you are not fixing the issue'
+    }
+
+    errors.push(error);
+  }
+
+
+  if(errors.length)
+  {
+    return res.render('why-no-fix-issue', {errors})
+  }
+
+  if(whyNoFixIssue !== undefined){
+    res.redirect('/contact-information')
+  }
+    
+})
+
+
 // Run this code when a form is submitted to 'did-audit-find-issues'
 router.post('/did-audit-find-issues-answer', function (req, res) {
 
@@ -167,6 +196,33 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
 
 
 router.post('/how-fix-issue-answer', function (req, res) {
+
+  var howFixIssue = req.session.data['how-fix-issue']
+
+  console.log(howFixIssue)
+  let errors = [];
+
+  if(howFixIssue === "")
+  {
+    let error = {
+      id: 'how-fix-issue',
+      message: 'Enter what you are doing to fix the issue'
+    }
+
+    errors.push(error);
+  }
+  console.log(errors)
+
+
+  if(errors.length)
+  {
+    return res.render('/how-fix-issue', {errors})
+  }
+
+  //if(howFixIssue !== undefined){
+  //  res.redirect('/did-audit-find-issues')
+  //}
+
   // Check if the session data exists
   if (!req.session.data) {
     req.session.data = {};
