@@ -16,51 +16,80 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        Contact information
-      </h1>
-
       <form class="form" action="/check-and-confirm" method="post">
+        
+        <h1 class="govuk-heading-l">
+          Contact information
+        </h1>
+        
+        <!-- Question 1 -->
+        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+          <label class="govuk-label" for="email-to-report-issues">
+            Email address users can contact to report issues
+          </label>
 
-        <p>
-          {% from "govuk/components/input/macro.njk" import govukInput %}
+            {% if errors | length %}
+            {% for error in errors %}
+            {% if error.id == 'email-to-report-issues' %}
+            <p id="email-to-report-issues-error" class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+            </p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
 
-          {{ govukInput({
-            label: {
-              text: "Email address users can contact to report issues"
-            },
-            hint: {
-              text: "For example, example@example.gov.uk"
-            },
-            id: "email-to-report-issues",
-            name: "email-to-report-issues"
-          }) }}
+          <div id="email-to-report-issues-hint" class="govuk-hint">
+            For example, name@example.gov.uk
+          </div>
+          <input class="govuk-input" id="email-to-report-issues" name="email-to-report-issues" type="email">
+        </div>
+        
 
-          {{ govukInput({
-            label: {
-              text: "Email address users can contact to receive data in a different format"
-            },
-            hint: {
-              text: "For example, example@example.gov.uk"
-            },
-            id: "email-for-different-format",
-            name: "email-for-different-format"
-          }) }}
+        <!-- Question 2 -->
+        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+          <label class="govuk-label" for="email-for-different-format">
+            Email address users can contact to receive data in a different format
+          </label>
 
-          {{ govukInput({
-            id: "days-for-reply",
-            name: "days-for-reply",
-            label: {
-              text: "How long will it take for users to get a reply?"
-            },
-            suffix: {
-              text: "business days"
-            },
-            classes: "govuk-input--width-2",
-            spellcheck: false
-          }) }}
-           
-        </p>
+            {% if errors | length %}
+            {% for error in errors %}
+            {% if error.id == 'email-for-different-format' %}
+            <p id="email-for-different-format-error" class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+            </p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+          <div id="email-for-different-format-hint" class="govuk-hint">
+            For example, name@example.gov.uk
+          </div>
+          <input class="govuk-input" id="email-for-different-format" name="email-for-different-format" type="email">
+        </div>
+        
+
+
+        <!-- Question 3 -->
+        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+            <label class="govuk-label" for="days-for-reply">
+              How long will it take for users to get a reply?
+            </label>
+
+            {% if errors | length %}
+            {% for error in errors %}
+            {% if error.id == 'days-for-reply' %}
+            <p id="days-for-reply-error" class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+            </p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input govuk-input--width-2" id="days-for-reply" name="days-for-reply" type="number" spellcheck="false">
+            <div class="govuk-input__suffix" aria-hidden="true">business days</div>
+          </div>
+        </div>
 
         {{ govukButton({
           text: "Continue"
