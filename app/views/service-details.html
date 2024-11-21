@@ -16,53 +16,101 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        Service details
-      </h1>
-
       <form class="form" action="/audit-date" method="post">
-          {% from "govuk/components/input/macro.njk" import govukInput %}
-
-          {{ govukInput({
-            label: {
-              text: "What is the name of the service?",
-              classes: "govuk-label--2"
-            },
-            id: "service-name",
-            name: "serviceName"
-          }) }}
-
-          {{ govukInput({
-            label: {
-              text: "What is the name of team that manages the service?",
-              classes: "govuk-label--2"
-            },
-            id: "team-name",
-            name: "teamName"
-          }) }}
-
-          {{ govukInput({
-            label: {
-              text: "What is the name of the product manager or responsible officer?",
-              classes: "govuk-label--2"
-            },
-            id: "pm-ro-name",
-            name: "pmRoName"
-          }) }}
-
-          {{ govukInput({
-            label: {
-              text: "What is the contact email for the team?",
-              classes: "govuk-label--2"
-            },
-            id: "team-email",
-            name: "teamEmail"
-          }) }}
         
+        <h1 class="govuk-heading-l">
+          Service details
+        </h1>
+        
+        
+          <!-- Question 1 -->
+          <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+            <label class="govuk-label" for="service-name">
+            What is the name of the service?
+          </label>
+          
+          {% if errors | length %}
+          {% for error in errors %}
+          {% if error.id == 'service-name' %}
+          <p id="service-name-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+          </p>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          
+          <input class="govuk-input" id="service-name" name="service-name" type="text">
+        </div>
+        
+
+
+        <!-- Question 2 -->
+        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+          <label class="govuk-label" for="team-name">
+            What is the name of team that manages the service?
+          </label>
+          
+          {% if errors | length %}
+          {% for error in errors %}
+          {% if error.id == 'team-name' %}
+          <p id="team-name-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+          </p>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          
+          <input class="govuk-input" id="team-name" name="team-name" type="text">
+        </div>
+        
+
+
+        <!-- Question 3 -->
+        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+          <label class="govuk-label" for="pm-ro-name">
+            What is the name of the product manager or responsible officer?
+          </label>
+          
+          {% if errors | length %}
+          {% for error in errors %}
+          {% if error.id == 'pm-ro-name' %}
+          <p id="pm-ro-name-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+          </p>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          
+          <input class="govuk-input" id="pm-ro-name" name="pm-ro-name" type="text">
+        </div>
+        
+
+
+        <!-- Question 4 -->
+        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+          <label class="govuk-label" for="service-name">
+            What is the contact email for the team?
+          </label>
+          
+          {% if errors | length %}
+          {% for error in errors %}
+          {% if error.id == 'team-email' %}
+          <p id="team-email-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+          </p>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          
+          <input class="govuk-input" id="team-email" name="team-email" type="email">
+        </div>
+        
+
 
         {{ govukButton({
           text: "Continue"
         }) }}
+        
 
       </form>
 
