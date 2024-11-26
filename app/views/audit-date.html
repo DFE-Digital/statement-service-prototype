@@ -16,10 +16,30 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/name-audit" method="post">
-        
+      {% if errors | length %}
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% for error in errors %}
+              <li>
+                <a href="#{{error.id}}">{{error.message}}</a>
+              </li>
+              {% endfor %}
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <form class="form" action="/audit-date-answer" method="post">
+        <!--send to name audit-->
           {% from "govuk/components/date-input/macro.njk" import govukDateInput %}
-          <div class="govuk-form-group">
+          <div class="govuk-form-group {% if errors | length %} govuk-form-group--error{%endif%}">
             <fieldset class="govuk-fieldset" role="group" aria-describedby="audit-date-hint">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                 <h1 class="govuk-fieldset__heading">
@@ -29,13 +49,54 @@
               <div id="audit-date-hint" class="govuk-hint">
                 For example, 27 3 2007
               </div>
+              {% if errors | length %}
+              {% for error in errors %}
+              {% if error.id == 'audit-date-year' %}
+              <p id="audit-date-year" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% if error.id == 'audit-date-month' %}
+              <p id="audit-date-month" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% if error.id == 'audit-date-day' %}
+              <p id="audit-date-day" class="govuk-error-message govuk-input--error">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% if error.id == 'audit-date-all' %}
+              <p id="audit-date-all" class="govuk-error-message govuk-input--error">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% if error.id == 'audit-date-day-month' %}
+              <p id="audit-date-day-month" class="govuk-error-message govuk-input--error">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% if error.id == 'audit-date-day-year' %}
+              <p id="audit-date-day-year" class="govuk-error-message govuk-input--error">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% if error.id == 'audit-date-month-year' %}
+              <p id="audit-date-month-year" class="govuk-error-message govuk-input--error">
+                <span class="govuk-visually-hidden">Error:</span> {{error.message}}
+              </p>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
               <div class="govuk-date-input" id="audit-date">
                 <div class="govuk-date-input__item">
                   <div class="govuk-form-group">
                     <label class="govuk-label govuk-date-input__label" for="audit-date-day">
                       Day
                     </label>
-                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="audit-date-day" name="audit-date-day" type="text" inputmode="numeric">
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2 
+                    {% if errors | length  %} {% for error in errors %} {% if error.id == 'audit-date-day' or error.id == 'audit-date-all' or error.id == 'audit-date-day-month' or error.id == 'audit-date-day-year'%} govuk-input--error {% endif %}{% endfor %}{%endif%}"
+                    id="audit-date-day" name="audit-date-day" type="text" inputmode="numeric">
                   </div>
                 </div>
                 <div class="govuk-date-input__item">
@@ -43,7 +104,9 @@
                     <label class="govuk-label govuk-date-input__label" for="audit-date-month">
                       Month
                     </label>
-                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="audit-date-month" name="audit-date-month" type="text" inputmode="numeric">
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2 
+                    {% if errors | length  %} {% for error in errors %} {% if error.id == 'audit-date-month' or error.id == 'audit-date-all' or error.id == 'audit-date-day-month' or error.id == 'audit-date-month-year'%} govuk-input--error {% endif %}{% endfor %}{%endif%}" 
+                    id="audit-date-month" name="audit-date-month" type="text" inputmode="numeric">
                   </div>
                 </div>
                 <div class="govuk-date-input__item">
@@ -51,7 +114,9 @@
                     <label class="govuk-label govuk-date-input__label" for="audit-date-year">
                       Year
                     </label>
-                    <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="audit-date-year" name="audit-date-year" type="text" inputmode="numeric">
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-4 
+                    {% if errors | length  %} {% for error in errors %} {% if error.id == 'audit-date-year' or error.id == 'audit-date-all' or error.id == 'audit-date-day-year' or error.id == 'audit-date-month-year'%} govuk-input--error {% endif %}{% endfor %}{%endif%}" 
+                    id="audit-date-year" name="audit-date-year" type="text" inputmode="numeric">
                   </div>
                 </div>
               </div>

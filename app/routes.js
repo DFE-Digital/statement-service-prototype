@@ -61,7 +61,80 @@ router.post('/pour-selection-answer', function (req, res) {
 
 })
 
+router.post('/audit-date-answer', function (req, res) {
 
+  var auditDay = req.session.data['audit-date-day'];
+  var auditMonth = req.session.data['audit-date-month'];
+  var auditYear = req.session.data['audit-date-year'];
+
+  let errors = [];
+
+  if(auditDay === "" && auditMonth === "" && auditYear === ""){
+    let error = {
+      id: 'audit-date-all',
+      message: 'Enter the date the audit was completed'
+    }
+    errors.push(error);
+  } 
+  else if(auditDay === ""){
+    if(auditMonth === ""){
+      let error = {
+        id:'audit-date-day-month',
+        message: 'The date the audit was complete must include a day and a month'
+      }
+      errors.push(error);
+    }
+    else if(auditYear === ""){
+      let error = {
+        id: 'audit-date-day-year',
+        message: 'The date the audit was completed must include a day and a year'
+      }
+      errors.push(error);
+    }
+    else{
+      let error = {
+        id: 'audit-date-day',
+        message: 'The date the audit was completed must include a day' 
+      }
+    errors.push(error);
+  }}
+
+
+  else if(auditMonth === ""){
+    if(auditYear === ""){
+      let error = {
+        id: 'audit-date-month-year',
+        message: 'The date the audit was completed must include a month and a year'
+      }
+      errors.push(error);
+    }
+    else{
+      let error = {
+        id: 'audit-date-month',
+        message: 'The date the audit was completed must include a month'
+      }
+    errors.push(error); 
+  }}
+  else if(auditYear === ""){
+    let error = {
+      id: 'audit-date-year',
+      message: 'The date the audit was completed must include a year'
+    }
+    errors.push(error);
+  }
+  console.log(auditYear)
+
+  
+  if(errors.length)
+    {
+      return res.render('audit-date', {errors})
+    }
+  
+  else(
+    res.redirect('/name-audit')
+  )
+
+})
 
 router.post('/name-audit-answer', function (req, res) {
 

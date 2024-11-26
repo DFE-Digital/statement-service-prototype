@@ -59,22 +59,7 @@
           {% endif %}
           <textarea class="govuk-textarea" id="how-fix-issue" name="how-fix-issue" rows="5" aria-describedby="how-fix-issue-hint"></textarea>
         </div>
-<!--
-        {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 
-        {{ govukTextarea({
-          name: "how-fix-issue",
-          value: data['how-fix-issue'],
-          label: {
-            text: "What are you doing to fix the issue?",
-            classes: "govuk-label--l",
-            isPageHeading: true
-          },
-          hint: {
-            text: "provide as much detail as possible"
-          }
-        }) }}
-      -->
         {{ govukButton({
           text: "Continue"
         }) }}
