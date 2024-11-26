@@ -61,6 +61,124 @@ router.post('/pour-selection-answer', function (req, res) {
 
 })
 
+
+
+router.post('/service-details-answer', function (req, res) {
+  let serviceName = req.session.data['service-name'];
+  let teamName = req.session.data['team-name'];
+  let pmRoName = req.session.data['pm-ro-name'];
+  let teamEmail = req.session.data['team-email'];
+
+  let errors = [];
+
+  if (serviceName === "")
+  {
+    let error = {
+      id: 'service-name',
+      message: 'Enter the service\'s name'
+    }
+
+    errors.push(error)
+  }
+
+  if (teamName === "")
+    {
+      let error = {
+        id: 'team-name',
+        message: 'Enter the team that manages the service\'s name'
+      }
+  
+      errors.push(error)
+    }
+
+  if (pmRoName === "")
+    {
+      let error = {
+        id: 'pm-ro-name',
+        message: 'Enter the name of the product manager or the responsible officer'
+      }
+    
+      errors.push(error)
+    }
+
+  if (teamEmail === "")
+    {
+      let error = {
+        id: 'team-email',
+        message: 'Enter the team\'s contact email'
+      }
+      
+      errors.push(error)
+    }
+
+
+  if (errors.length)
+  {
+    return res.render('service-details', {errors})
+  }
+
+  else
+  {
+    res.redirect('/audit-date')
+  }
+  
+})
+
+
+
+router.post('/contact-information-answer', function (req, res) {
+  let reportIssues = req.session.data['email-to-report-issues'];
+  let differentFormat = req.session.data['email-for-different-format'];
+  let daysReply = req.session.data['days-for-reply'];
+
+  let errors = [];
+
+  if (reportIssues === "")
+  {
+    let error = {
+      id: 'email-to-report-issues',
+      message: 'Enter the email for users to report issues'
+    }
+
+    errors.push(error)
+  }
+
+  if (differentFormat === "")
+    {
+      let error = {
+        id: 'email-for-different-format',
+        message: 'Enter the email for users to recieve data in a different format'
+      }
+  
+      errors.push(error)
+    }
+
+  if (daysReply === "")
+    {
+      let error = {
+        id: 'days-for-reply',
+        message: 'Enter the number of days for users to get a reply'
+      }
+    
+      errors.push(error)
+    }
+
+
+  if (errors.length)
+  {
+    return res.render('contact-information', {errors})
+  }
+
+  else
+  {
+    res.redirect('/check-and-confirm')
+  }
+  
+})
+
+
+
+
 router.post('/audit-date-answer', function (req, res) {
 
   var auditDay = req.session.data['audit-date-day'];

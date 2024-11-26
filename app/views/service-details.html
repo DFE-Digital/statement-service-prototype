@@ -16,7 +16,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/audit-date" method="post">
+      <form class="form" action="/service-details-answer" method="post">
 
         {% if errors | length %}
       <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -45,7 +45,7 @@
         
         
           <!-- Question 1 -->
-          <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+          <div class="govuk-form-group {% if errors | length %} {% for error in errors %} {% if error.id == 'service-name' %} govuk-form-group--error {% endif %} {% endfor %} {% endif %}">
             <label class="govuk-label" for="service-name">
             What is the name of the service?
           </label>
@@ -60,13 +60,13 @@
           {% endfor %}
           {% endif %}
           
-          <input class="govuk-input" id="service-name" name="service-name" type="text">
+          <input class="govuk-input {% if errors | length %} {% for error in errors %} {% if error.id == 'service-name' %} govuk-input--error {% endif %} {% endfor %} {% endif %}" id="service-name" name="service-name" type="text" value="{{data['service-name']}}">
         </div>
         
 
 
         <!-- Question 2 -->
-        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+        <div class="govuk-form-group {% if errors | length %} {% for error in errors %} {% if error.id == 'team-name' %} govuk-form-group--error {% endif %} {% endfor %} {% endif %}">
           <label class="govuk-label" for="team-name">
             What is the name of team that manages the service?
           </label>
@@ -81,13 +81,13 @@
           {% endfor %}
           {% endif %}
           
-          <input class="govuk-input" id="team-name" name="team-name" type="text">
+          <input class="govuk-input {% if errors | length %} {% for error in errors %} {% if error.id == 'team-name' %} govuk-input--error {% endif %} {% endfor %} {% endif %}" id="team-name" name="team-name" type="text" value="{{data['team-name']}}">
         </div>
         
 
 
         <!-- Question 3 -->
-        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+        <div class="govuk-form-group {% if errors | length %} {% for error in errors %} {% if error.id == 'pm-ro-name' %} govuk-form-group--error {% endif %} {% endfor %} {% endif %}">
           <label class="govuk-label" for="pm-ro-name">
             What is the name of the product manager or responsible officer?
           </label>
@@ -102,13 +102,13 @@
           {% endfor %}
           {% endif %}
           
-          <input class="govuk-input" id="pm-ro-name" name="pm-ro-name" type="text">
+          <input class="govuk-input {% if errors | length %} {% for error in errors %} {% if error.id == 'pm-ro-name' %} govuk-input--error {% endif %} {% endfor %} {% endif %}" id="pm-ro-name" name="pm-ro-name" type="text" value="{{data['pm-ro-name']}}">
         </div>
         
 
 
         <!-- Question 4 -->
-        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+        <div class="govuk-form-group {% if errors | length %} {% for error in errors %} {% if error.id == 'team-email' %} govuk-form-group--error {% endif %} {% endfor %} {% endif %}">
           <label class="govuk-label" for="team-email">
             What is the contact email for the team?
           </label>
@@ -123,7 +123,7 @@
           {% endfor %}
           {% endif %}
           
-          <input class="govuk-input" id="team-email" name="team-email" type="email">
+          <input class="govuk-input {% if errors | length %} {% for error in errors %} {% if error.id == 'team-email' %} govuk-input--error {% endif %} {% endfor %} {% endif %}" id="team-email" name="team-email" type="email" value="{{data['team-email']}}">
         </div>
         
 

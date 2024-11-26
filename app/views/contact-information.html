@@ -16,7 +16,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <form class="form" action="/check-and-confirm" method="post">
+      <form class="form" action="/contact-information-answer" method="post">
 
         {% if errors | length %}
       <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -43,7 +43,7 @@
         </h1>
         
         <!-- Question 1 -->
-        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+        <div class="govuk-form-group {% if errors | length %} {% for error in errors %} {% if error.id == 'email-to-report-issues' %} govuk-form-group--error {% endif %} {% endfor %} {% endif %}">
           <label class="govuk-label" for="email-to-report-issues">
             Email address users can contact to report issues
           </label>
@@ -61,12 +61,12 @@
           <div id="email-to-report-issues-hint" class="govuk-hint">
             For example, name@example.gov.uk
           </div>
-          <input class="govuk-input" id="email-to-report-issues" name="email-to-report-issues" type="email">
+          <input class="govuk-input {% if errors | length %} {% for error in errors %} {% if error.id == 'email-to-report-issues' %} govuk-input--error {% endif %} {% endfor %} {% endif %}" id="email-to-report-issues" name="email-to-report-issues" type="email" value="{{data['email-to-report-issues']}}">
         </div>
         
 
         <!-- Question 2 -->
-        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+        <div class="govuk-form-group {% if errors | length %} {% for error in errors %} {% if error.id == 'email-for-different-format' %} govuk-form-group--error {% endif %} {% endfor %} {% endif %}">
           <label class="govuk-label" for="email-for-different-format">
             Email address users can contact to receive data in a different format
           </label>
@@ -84,13 +84,13 @@
           <div id="email-for-different-format-hint" class="govuk-hint">
             For example, name@example.gov.uk
           </div>
-          <input class="govuk-input" id="email-for-different-format" name="email-for-different-format" type="email">
+          <input class="govuk-input {% if errors | length %} {% for error in errors %} {% if error.id == 'email-for-different-format' %} govuk-input--error {% endif %} {% endfor %} {% endif %}" id="email-for-different-format" name="email-for-different-format" type="email" value="{{data['email-for-different-format']}}">
         </div>
         
 
 
         <!-- Question 3 -->
-        <div class="govuk-form-group {% if errors | length %} govuk-form-group--error {% endif %}">
+        <div class="govuk-form-group {% if errors | length %} {% for error in errors %} {% if error.id == 'days-for-reply' %} govuk-form-group--error {% endif %} {% endfor %} {% endif %}">
             <label class="govuk-label" for="days-for-reply">
               How long will it take for users to get a reply?
             </label>
@@ -106,7 +106,7 @@
             {% endif %}
 
           <div class="govuk-input__wrapper">
-            <input class="govuk-input govuk-input--width-2" id="days-for-reply" name="days-for-reply" type="number" spellcheck="false">
+            <input class="govuk-input govuk-input--width-2 {% if errors | length %} {% for error in errors %} {% if error.id == 'days-for-reply' %} govuk-input--error {% endif %} {% endfor %} {% endif %}" id="days-for-reply" name="days-for-reply" type="number" spellcheck="false" value="{{data['days-for-reply']}}">
             <div class="govuk-input__suffix" aria-hidden="true">business days</div>
           </div>
         </div>
