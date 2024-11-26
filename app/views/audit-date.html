@@ -37,7 +37,6 @@
       {% endif %}
 
       <form class="form" action="/audit-date-answer" method="post">
-        <!--send to name audit-->
           {% from "govuk/components/date-input/macro.njk" import govukDateInput %}
           <div class="govuk-form-group {% if errors | length %} govuk-form-group--error{%endif%}">
             <fieldset class="govuk-fieldset" role="group" aria-describedby="audit-date-hint">
