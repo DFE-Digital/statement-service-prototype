@@ -94,33 +94,7 @@ router.post('/name-audit-answer', function (req, res) {
 })
 
 
-router.post('/why-no-fix-issue-answer', function (req, res) {
 
-  var whyNoFixIssue = req.session.data['why-no-fix-issue']
-
-  let errors = [];
-
-  if(whyNoFixIssue === "")
-  {
-    let error = {
-      id: 'why-no-fix-issue',
-      message: 'Enter why you are not fixing the issue'
-    }
-
-    errors.push(error);
-  }
-
-
-  if(errors.length)
-  {
-    return res.render('why-no-fix-issue', {errors})
-  }
-
-  if(whyNoFixIssue !== undefined){
-    res.redirect('/contact-information')
-  }
-    
-})
 
 
 // Run this code when a form is submitted to 'did-audit-find-issues'
@@ -275,6 +249,27 @@ router.post('/why-no-fix-issue-answer', function (req, res) {
   if (!req.session.data.issues) {
     req.session.data.issues = [];
   }
+
+  var whyNoFixIssue = req.session.data['why-no-fix-issue']
+
+  let errors = [];
+
+  if(whyNoFixIssue === "")
+  {
+    let error = {
+      id: 'why-no-fix-issue',
+      message: 'Enter why you are not fixing the issue'
+    }
+
+    errors.push(error);
+  }
+
+
+  if(errors.length)
+  {
+    return res.render('why-no-fix-issue', {errors})
+  }
+  
 try{
   // Get the submitted data from the request session
   const issue = {
@@ -282,7 +277,7 @@ try{
     principle: req.session.data['pour-selection'],
     criteria: req.session.data['wcag-criteria'],
     fixIssueYN: req.session.data['planning-to-fix-issue'],
-    whyNotFixIssue: req.session.data['no-fix-issue']
+    whyNotFixIssue: req.session.data['why-no-fix-issue']
   };
 
   // Push the new approved product to the session array
@@ -295,7 +290,7 @@ try{
   req.session.data['pour-selection'] = ""
   req.session.data['wcag-criteria'] = ""
   req.session.data['planning-to-fix-issue'] = ""
-  req.session.data['no-fix-issue'] = ""
+  req.session.data['why-no-fix-issue'] = ""
 
   console.log(req.session.data.issues); // For debugging
 }catch(error){
