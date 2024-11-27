@@ -49,7 +49,7 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
               </legend>
               {% if errors | length %}
               {% for error in errors %}
-              {% if error.id == 'planning-to-fix-issue' %}
+              {% if error.id == 'pour-selection' %}
               <p id="pour-selection" class="govuk-error-message">
                 <span class="govuk-visually-hidden">Error:</span> {{error.message}}
               </p>
