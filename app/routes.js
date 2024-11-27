@@ -61,6 +61,33 @@ router.post('/pour-selection-answer', function (req, res) {
 
 })
 
+router.post('/wcag-specific-issues-answer', function (req, res) {
+
+  var specissues = req.session.data['wcag-criteria']
+
+    let errors = [];
+
+  if (specissues === undefined)
+  {
+    let error = {
+      id: 'wcag-criteria',
+      message: 'Select a criteria that has not been met'
+    }
+
+    errors.push(error);
+  }
+
+    if(errors.length)
+    {
+      return res.render('wcag-criteria', {errors})
+    }
+
+    if(specissues !== undefined){
+      res.redirect('/planning-to-fix-issue')
+    }
+
+})
+
 
 
 router.post('/service-details-answer', function (req, res) {
