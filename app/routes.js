@@ -3,6 +3,7 @@
 // https://prototype-kit.service.gov.uk/docs/create-routes
 //
 
+const {isDate, isValid} = require('date-fns')
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
@@ -43,7 +44,7 @@ router.post('/pour-selection-answer', function (req, res) {
   if (genissues === undefined)
   {
     let error = {
-      id: 'pour-selection',
+      id: 'pour-selection-1',
       message: 'Select a criteria that has not been met'
     }
 
@@ -56,7 +57,37 @@ router.post('/pour-selection-answer', function (req, res) {
     }
 
     if(genissues !== undefined){
+      req.session.data['wcag-criteria'] = undefined
       res.redirect('/wcag-specific-issues')
+    }
+
+})
+
+router.post('/wcag-specific-issues-answer', function (req, res) {
+
+  var specissues = req.session.data['wcag-criteria']
+console.log(specissues)
+    let errors = [];
+
+  if (specissues === undefined)
+  {
+    let error = {
+      id: 'wcag-criteria-0',
+      message: 'Select a criteria that has not been met'
+    }
+
+    errors.push(error);
+  }
+
+    if(errors.length)
+    {
+      let selectedPrinciple = req.session.data['pour-selection'];
+        const filteredData = filterByPrinciple(selectedPrinciple);
+      return res.render('wcag-specific-issues', {errors,criterion:filteredData})
+    }
+
+    if(specissues !== undefined){
+      res.redirect('/planning-to-fix-issue')
     }
 
 })
@@ -240,8 +271,12 @@ router.post('/audit-date-answer', function (req, res) {
     }
     errors.push(error);
   }
+  console.log(auditDay)
+  console.log(auditMonth)
   console.log(auditYear)
-
+  //let isValidDate = isDate(auditYear+"-"+auditMonth+"-"+auditDay)
+  const isValidDate = isDate(new Date(auditYear,auditMonth,auditDay))
+  console.log(isValidDate)
   
   if(errors.length)
     {
@@ -253,6 +288,10 @@ router.post('/audit-date-answer', function (req, res) {
   )
 
 })
+
+
+
+
 
 router.post('/name-audit-answer', function (req, res) {
 
