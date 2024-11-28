@@ -49,36 +49,36 @@ Question page template – {{ serviceName }} – GOV.UK Prototype Kit
               </legend>
               {% if errors | length %}
               {% for error in errors %}
-              {% if error.id == 'pour-selection' %}
+              {% if error.id == 'pour-selection-1' %}
               <p id="pour-selection" class="govuk-error-message">
                 <span class="govuk-visually-hidden">Error:</span> {{error.message}}
               </p>
               {% endif %}
               {% endfor %}
-            
               {% endif %}
+
               <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Perceivable" {{ checked('pour-selection','Perceivable') }}>
-                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                  <input class="govuk-radios__input" id="pour-selection-1" name="pour-selection" type="radio" value="Perceivable" {{ checked('pour-selection','Perceivable') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection-1">
                     1. Perceivable
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Operable" {{ checked('pour-selection','Operable') }}>
-                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                  <input class="govuk-radios__input" id="pour-selection-2" name="pour-selection" type="radio" value="Operable" {{ checked('pour-selection','Operable') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection-2">
                     2. Operable
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Understandable" {{ checked('pour-selection','Understandable') }}>
-                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                  <input class="govuk-radios__input" id="pour-selection-3" name="pour-selection" type="radio" value="Understandable" {{ checked('pour-selection','Understandable') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection-3">
                       3. Understandable
                   </label>
                   </div>
                   <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="pour-selection" name="pour-selection" type="radio" value="Robust" {{ checked('pour-selection','Robust') }}>
-                  <label class="govuk-label govuk-radios__label" for="pour-selection">
+                  <input class="govuk-radios__input" id="pour-selection-4" name="pour-selection" type="radio" value="Robust" {{ checked('pour-selection','Robust') }}>
+                  <label class="govuk-label govuk-radios__label" for="pour-selection-4">
                     4. Robust
                   </label>
                 </div>
