@@ -15,248 +15,167 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
     <form action="/confirmation-page" method="post" novalidate>
-    
+
+
+
+      <!-- !! No links have been added !! -->
+
+
+      
       <h1 class="govuk-heading-l">
-        Check and confirm
+        Check and Confirm
       </h1>
+
+
       <h2 class="govuk-heading-m">
         Service details
       </h2>
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: {
-              text: "Service name"
-            },
-            value: {
-            text: data['service-name']
-            },
-            actions: {
-              items: [
-                {
-                  href: "/service-details",
-                  text: "Change",
-                  visuallyHiddenText: "Service name"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "Team name"
-            },
-            value: {
-              text: data['team-name']
-            },
-            actions: {
-              items: [
-                {
-                  href: "/service-details",
-                  text: "Change",
-                  visuallyHiddenText: "Team name"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "Service owner"
-            },
-            value: {
-              text: data['pm-ro-name']
-            },
-            actions: {
-              items: [
-                {
-                  href: "/service-details",
-                  text: "Change",
-                  visuallyHiddenText: "Service owner"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "Team's contact email"
-            },
-            value: {
-              text: data['team-email']
-            },
-            actions: {
-              items: [
-                {
-                  href: "/service-details",
-                  text: "Change",
-                  visuallyHiddenText: "Question 2"
-                }
-              ]
-            }
-          }
-        ]
-        
-      }) }}
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Service name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['service-name']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Team name
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['team-name']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Service owner
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['pm-ro-name']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Team's contact email
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['team-email']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact details</span></a>
+          </dd>
+        </div>
+      </dl>
+
+
+
+
+
 
       <h2 class="govuk-heading-m">
         Audit details
       </h2>
-      {%set date = data['audit-date-day'] +'/'+ data['audit-date-month'] +'/'+ data['audit-date-year']%}
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: {
-              text: "Audit completed by"
-            },
-            value: {
-              text: data['name-
-              audit']
-            },
-            actions: {
-              items: [
-                {
-                  href: "/name-audit",
-                  text: "Change",
-                  visuallyHiddenText: "Audit completed by"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "Date audit completed"
-            },
-            value: {
-              text: date
-            },
-            actions: {
-              items: [
-                {
-                  href: "audit-date",
-                  text: "Change",
-                  visuallyHiddenText: "Date audit completed"
-                }
-              ]
-            }
-          }
-          
-        ]
-        
-      }) }}
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Audit completed by
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['name-audit']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Date audit completed
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{date}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+          </dd>
+        </div>
+      </dl>
+
+
+
+
+      
+      
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-heading-m">
+            Issues
+          </dt>
+          <div id="issues-hint" class="govuk-hint">
+            This will take you to a page with all issues listed.
+          </div>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+          </dd>
+        </div>
+      </dl>
+
+
+
+
+
 
       <h2 class="govuk-heading-m">
-        Issues
+        Contact details
       </h2>
-      {{ govukSummaryList({
-        rows: [
-          {
-            key: {
-              text: "issue"
-            },
-            value: {
-              text: "example"
-            },
-            actions: {
-              items: [
-                {
-                  href: "#",
-                  text: "Change",
-                  visuallyHiddenText: "issue"
-                }
-              ]
-            }
-          }
-          ,
-          {
-            key: {
-              text: "Issue"
-            },
-            value: {
-              text: "example"
-            },
-            actions: {
-              items: [
-                {
-                  href: "#",
-                  text: "Change",
-                  visuallyHiddenText: "Issue"
-                }
-              ]
-            }
-          }
 
-          
-          
-        ]
-        
-      })
-    
-    }}
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Report accessibility issues
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['email-to-report-issues']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Recieve data in a different format
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['email-for-different-format']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Time to respond to user
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{data['days-for-reply']}}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+          </dd>
+        </div>
+      </dl>
 
-    <h2 class="govuk-heading-m">
-      Contact details
-    </h2>
-    {{ govukSummaryList({
-      rows: [
-        {
-          key: {
-            text: "Report accessibility issues"
-          },
-          value: {
-            text: data['email-to-report-issues']
-          },
-          actions: {
-            items: [
-              {
-                href: "/contact-information",
-                text: "Change",
-                visuallyHiddenText: "Report accessibility issues"
-              }
-            ]
-          }
-        }
-        ,
-        {
-          key: {
-            text: "Recieve data in a different format"
-          },
-          value: {
-            text: data['email-for-different-format']
-          },
-          actions: {
-            items: [
-              {
-                href: "/contact-information",
-                text: "Change",
-                visuallyHiddenText: "Recieve data in a different format"
-              }
-            ]
-          }
-        }
-        ,
-        {
-          key: {
-            text: "Time to respond to user"
-          },
-          value: {
-            text: data['days-for-reply']
-          },
-          actions: {
-            items: [
-              {
-                href: "/contact-information",
-                text: "Change",
-                visuallyHiddenText: "time to respond to user"
-              }
-            ]
-          }
-        }
-        
-      ]
-      
-    }) }}
 
 
         {{ govukButton({
