@@ -66,7 +66,8 @@ router.post('/pour-selection-answer', function (req, res) {
 router.post('/wcag-specific-issues-answer', function (req, res) {
 
   var specissues = req.session.data['wcag-criteria']
-console.log(specissues)
+  var listOfIssues = req.session.data.issues
+  console.log(specissues)
     let errors = [];
 
   if (specissues === undefined)
@@ -78,13 +79,29 @@ console.log(specissues)
 
     errors.push(error);
   }
+  if (!listOfIssues){
+  }
+  else if(listOfIssues.length)
+    {
 
+      listOfIssues.forEach((issue) => {
+        if (issue.criteria === specissues){
+          let error = {
+            id: 'wcag-criteria-0',
+            message: 'You can not select the same criteria twice'
+          }
+          errors.push(error);
+        }
+      }
+      )};
     if(errors.length)
     {
       let selectedPrinciple = req.session.data['pour-selection'];
         const filteredData = filterByPrinciple(selectedPrinciple);
       return res.render('wcag-specific-issues', {errors,criterion:filteredData})
     }
+
+
 
     if(specissues !== undefined){
       res.redirect('/planning-to-fix-issue')
@@ -445,6 +462,7 @@ try{
     fixIssueYN: req.session.data['planning-to-fix-issue'],
     howFixIssue: req.session.data['how-fix-issue']
   };
+
 
   // Push the new approved product to the session array
   req.session.data.issues.push(issue);

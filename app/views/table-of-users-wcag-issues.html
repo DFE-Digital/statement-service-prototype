@@ -6,12 +6,7 @@
 
 {% block content %}
 
-<h1>List of issues</h1>
-<!-- <p><a href = "/pour-selection">add an issue</a></p> -->
-<form action = "/pour-selection" method = "get">
-{{ govukButton({
-  text: "Add an issue"
-}) }}
+<h1 class="govuk-heading-l">(service name) accessibility issues</h1>
 
 {%if listOfIssues|length>0%}
 <table class="govuk-table">
@@ -22,7 +17,7 @@
       <th scope="col" class="govuk-table__header">Criteria</th>
       <th scope="col" class="govuk-table__header">Are fix issue</th>
       <th scope="col" class="govuk-table__header">Why not fix/how fix</th>
-      <th scope="col" class="govuk-table__header"></th>
+      <th scope="col" class="govuk-table__header">Action</th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
@@ -52,10 +47,17 @@
 
 <!--{{listOfIssues|dump}}-->
 
-<form action = "/contact-information" method = "get">
-{{ govukButton({
-  text: "Continue"
-}) }}
-</form>
 
+<div class="govuk-button-group">
+  <form action = "/pour-selection" method = "get">
+    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Add an issue
+    </button>
+  </form>
+  <form action = "/contact-information" method = "get">
+    <button type="submit" class="govuk-button" data-module="govuk-button">
+      Continue
+    </button>
+  </form>
+</div>
 {% endblock %}
