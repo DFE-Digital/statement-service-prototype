@@ -3,7 +3,7 @@
 // https://prototype-kit.service.gov.uk/docs/create-routes
 //
 
-const {isDate, isValid} = require('date-fns')
+const { isDate, isValid } = require('date-fns')
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
@@ -17,7 +17,7 @@ function filterByPrinciple(selectedPrinciple) {
   return data.filter(item => item.principle === selectedPrinciple);
 }
 
-router.get('/wcag-specific-issues', function (req, res) { 
+router.get('/wcag-specific-issues', function (req, res) {
   let selectedPrinciple = req.session.data['pour-selection'];
   if (selectedPrinciple != "") {
 
@@ -27,7 +27,7 @@ router.get('/wcag-specific-issues', function (req, res) {
 
 
     console.log(filteredData)
-    return res.render('wcag-specific-issues', {criterion:filteredData})
+    return res.render('wcag-specific-issues', { criterion: filteredData })
   } else {
     return res.redirect('pour-selection')
   }
@@ -39,10 +39,9 @@ router.post('/pour-selection-answer', function (req, res) {
 
   var genissues = req.session.data['pour-selection']
 
-    let errors = [];
+  let errors = [];
 
-  if (genissues === undefined)
-  {
+  if (genissues === undefined) {
     let error = {
       id: 'pour-selection-1',
       message: 'Select a criteria that has not been met'
@@ -51,15 +50,14 @@ router.post('/pour-selection-answer', function (req, res) {
     errors.push(error);
   }
 
-    if(errors.length)
-    {
-      return res.render('pour-selection', {errors})
-    }
+  if (errors.length) {
+    return res.render('pour-selection', { errors })
+  }
 
-    if(genissues !== undefined){
-      req.session.data['wcag-criteria'] = undefined
-      res.redirect('/wcag-specific-issues')
-    }
+  if (genissues !== undefined) {
+    req.session.data['wcag-criteria'] = undefined
+    res.redirect('/wcag-specific-issues')
+  }
 
 })
 
@@ -68,10 +66,9 @@ router.post('/wcag-specific-issues-answer', function (req, res) {
   var specissues = req.session.data['wcag-criteria']
   var listOfIssues = req.session.data.issues
   console.log(specissues)
-    let errors = [];
+  let errors = [];
 
-  if (specissues === undefined)
-  {
+  if (specissues === undefined) {
     let error = {
       id: 'wcag-criteria-0',
       message: 'Select a criteria that has not been met'
@@ -79,33 +76,32 @@ router.post('/wcag-specific-issues-answer', function (req, res) {
 
     errors.push(error);
   }
-  if (!listOfIssues){
+  if (!listOfIssues) {
   }
-  else if(listOfIssues.length)
-    {
+  else if (listOfIssues.length) {
 
-      listOfIssues.forEach((issue) => {
-        if (issue.criteria === specissues){
-          let error = {
-            id: 'wcag-criteria-0',
-            message: 'You can not select the same criteria twice'
-          }
-          errors.push(error);
+    listOfIssues.forEach((issue) => {
+      if (issue.criteria === specissues) {
+        let error = {
+          id: 'wcag-criteria-0',
+          message: 'You can not select the same criteria twice'
         }
+        errors.push(error);
       }
-      )};
-    if(errors.length)
-    {
-      let selectedPrinciple = req.session.data['pour-selection'];
-        const filteredData = filterByPrinciple(selectedPrinciple);
-      return res.render('wcag-specific-issues', {errors,criterion:filteredData})
     }
+    )
+  };
+  if (errors.length) {
+    let selectedPrinciple = req.session.data['pour-selection'];
+    const filteredData = filterByPrinciple(selectedPrinciple);
+    return res.render('wcag-specific-issues', { errors, criterion: filteredData })
+  }
 
 
 
-    if(specissues !== undefined){
-      res.redirect('/planning-to-fix-issue')
-    }
+  if (specissues !== undefined) {
+    res.redirect('/planning-to-fix-issue')
+  }
 
 })
 
@@ -119,8 +115,7 @@ router.post('/service-details-answer', function (req, res) {
 
   let errors = [];
 
-  if (serviceName === "")
-  {
+  if (serviceName === "") {
     let error = {
       id: 'service-name',
       message: 'Enter the service\'s name'
@@ -129,47 +124,42 @@ router.post('/service-details-answer', function (req, res) {
     errors.push(error)
   }
 
-  if (teamName === "")
-    {
-      let error = {
-        id: 'team-name',
-        message: 'Enter the team that manages the service\'s name'
-      }
-  
-      errors.push(error)
+  if (teamName === "") {
+    let error = {
+      id: 'team-name',
+      message: 'Enter the team that manages the service\'s name'
     }
 
-  if (pmRoName === "")
-    {
-      let error = {
-        id: 'pm-ro-name',
-        message: 'Enter the name of the product manager or the responsible officer'
-      }
-    
-      errors.push(error)
-    }
-
-  if (teamEmail === "")
-    {
-      let error = {
-        id: 'team-email',
-        message: 'Enter the team\'s contact email'
-      }
-      
-      errors.push(error)
-    }
-
-
-  if (errors.length)
-  {
-    return res.render('service-details', {errors})
+    errors.push(error)
   }
 
-  else
-  {
+  if (pmRoName === "") {
+    let error = {
+      id: 'pm-ro-name',
+      message: 'Enter the name of the product manager or the responsible officer'
+    }
+
+    errors.push(error)
+  }
+
+  if (teamEmail === "") {
+    let error = {
+      id: 'team-email',
+      message: 'Enter the team\'s contact email'
+    }
+
+    errors.push(error)
+  }
+
+
+  if (errors.length) {
+    return res.render('service-details', { errors })
+  }
+
+  else {
     res.redirect('/audit-date')
   }
-  
+
 })
 
 
@@ -181,8 +171,7 @@ router.post('/contact-information-answer', function (req, res) {
 
   let errors = [];
 
-  if (reportIssues === "")
-  {
+  if (reportIssues === "") {
     let error = {
       id: 'email-to-report-issues',
       message: 'Enter the email for users to report issues'
@@ -191,37 +180,33 @@ router.post('/contact-information-answer', function (req, res) {
     errors.push(error)
   }
 
-  if (differentFormat === "")
-    {
-      let error = {
-        id: 'email-for-different-format',
-        message: 'Enter the email for users to recieve data in a different format'
-      }
-  
-      errors.push(error)
+  if (differentFormat === "") {
+    let error = {
+      id: 'email-for-different-format',
+      message: 'Enter the email for users to recieve data in a different format'
     }
 
-  if (daysReply === "")
-    {
-      let error = {
-        id: 'days-for-reply',
-        message: 'Enter the number of days for users to get a reply'
-      }
-    
-      errors.push(error)
-    }
-
-
-  if (errors.length)
-  {
-    return res.render('contact-information', {errors})
+    errors.push(error)
   }
 
-  else
-  {
+  if (daysReply === "") {
+    let error = {
+      id: 'days-for-reply',
+      message: 'Enter the number of days for users to get a reply'
+    }
+
+    errors.push(error)
+  }
+
+
+  if (errors.length) {
+    return res.render('contact-information', { errors })
+  }
+
+  else {
     res.redirect('/check-and-confirm')
   }
-  
+
 })
 
 
@@ -229,83 +214,82 @@ router.post('/contact-information-answer', function (req, res) {
 
 router.post('/audit-date-answer', function (req, res) {
 
-  var auditDay = req.session.data['audit-date-day'];
-  var auditMonth = req.session.data['audit-date-month'];
-  var auditYear = req.session.data['audit-date-year'];
+  // var auditDay = req.session.data['audit-date-day'];
+  // var auditMonth = req.session.data['audit-date-month'];
+  // var auditYear = req.session.data['audit-date-year'];
+
+  // AnJo - the dates are being passed around as strings, when they need to be numbers (Date() method expects numbers not strings.
+  // Parse them as numbers.
+  // Should do additional validation on the input to check its a number too.
+
+  const auditDay = parseInt(req.session.data['audit-date-day'], 10);
+  const auditMonth = parseInt(req.session.data['audit-date-month'], 10);
+  const auditYear = parseInt(req.session.data['audit-date-year'], 10);
 
   let errors = [];
 
-  if(auditDay === "" && auditMonth === "" && auditYear === ""){
-    let error = {
+  // Check if all fields are empty
+  if (!auditDay && !auditMonth && !auditYear) {
+    errors.push({
       id: 'audit-date-all',
-      message: 'Enter the date the audit was completed'
-    }
-    errors.push(error);
-  } 
-  else if(auditDay === ""){
-    if(auditMonth === ""){
-      let error = {
-        id:'audit-date-day-month',
-        message: 'The date the audit was complete must include a day and a month'
-      }
-      errors.push(error);
-    }
-    else if(auditYear === ""){
-      let error = {
-        id: 'audit-date-day-year',
-        message: 'The date the audit was completed must include a day and a year'
-      }
-      errors.push(error);
-    }
-    else{
-      let error = {
+      message: 'Enter the date the audit was completed',
+    });
+  } else {
+    // Check individual fields
+    if (!auditDay) {
+      errors.push({
         id: 'audit-date-day',
-        message: 'The date the audit was completed must include a day' 
-      }
-    errors.push(error);
-  }}
-
-
-  else if(auditMonth === ""){
-    if(auditYear === ""){
-      let error = {
-        id: 'audit-date-month-year',
-        message: 'The date the audit was completed must include a month and a year'
-      }
-      errors.push(error);
+        message: 'The date the audit was completed must include a day',
+      });
     }
-    else{
-      let error = {
+    if (!auditMonth) {
+      errors.push({
         id: 'audit-date-month',
-        message: 'The date the audit was completed must include a month'
+        message: 'The date the audit was completed must include a month',
+      });
+    }
+    if (!auditYear) {
+      errors.push({
+        id: 'audit-date-year',
+        message: 'The date the audit was completed must include a year',
+      });
+    }
+
+    // Validate if the date is valid
+    if (auditDay && auditMonth && auditYear) {
+      const isValidDate = isValidDateCheck(auditDay, auditMonth, auditYear);
+
+      if (!isValidDate) {
+        errors.push({
+          id: 'audit-date-invalid',
+          message: 'Enter a valid date',
+        });
       }
-    errors.push(error); 
-  }}
-  else if(auditYear === ""){
-    let error = {
-      id: 'audit-date-year',
-      message: 'The date the audit was completed must include a year'
     }
-    errors.push(error);
   }
-  console.log(auditDay)
-  console.log(auditMonth)
-  console.log(auditYear)
-  //let isValidDate = isDate(auditYear+"-"+auditMonth+"-"+auditDay)
-  const isValidDate = isDate(new Date(auditYear,auditMonth,auditDay))
-  console.log(isValidDate)
-  
-  if(errors.length)
-    {
-      return res.render('audit-date', {errors})
-    }
-  
-  else(
+
+  if (errors.length) {
+    return res.render('audit-date', { errors })
+  }
+
+  else (
     res.redirect('/name-audit')
   )
 
 })
 
+
+// Function to check if a date is valid
+function isValidDateCheck(day, month, year) {
+  // Month is 0-indexed in JavaScript Date (January = 0)
+  // Need to deduct 1 off the month entered
+  const date = new Date(year, month - 1, day);
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+}
 
 
 
@@ -317,8 +301,7 @@ router.post('/name-audit-answer', function (req, res) {
   console.log(nameAudit)
   let errors = [];
 
-  if(nameAudit === "")
-  {
+  if (nameAudit === "") {
     let error = {
       id: 'name-audit',
       message: 'Enter the person who created the audit'
@@ -329,15 +312,14 @@ router.post('/name-audit-answer', function (req, res) {
   console.log(errors)
 
 
-  if(errors.length)
-  {
-    return res.render('name-audit', {errors})
+  if (errors.length) {
+    return res.render('name-audit', { errors })
   }
 
-  if(nameAudit !== undefined){
+  if (nameAudit !== undefined) {
     res.redirect('/did-audit-find-issues')
   }
-    
+
 })
 
 
@@ -352,8 +334,7 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
 
   let errors = [];
 
-  if( didAuditFindIssues === undefined)
-  {
+  if (didAuditFindIssues === undefined) {
     let error = {
       id: 'did-audit-find-issues',
       message: 'Select an option'
@@ -363,9 +344,8 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
   }
 
 
-  if(errors.length)
-  {
-    return res.render('did-audit-find-issues', {errors})
+  if (errors.length) {
+    return res.render('did-audit-find-issues', { errors })
   }
 
   // Check whether the variable matches a condition
@@ -387,8 +367,7 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
 
   let errors = [];
 
-  if(planningToFixIssue === undefined)
-  {
+  if (planningToFixIssue === undefined) {
     let error = {
       id: 'planning-to-fix-issue',
       message: 'Select an option'
@@ -397,9 +376,8 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
     errors.push(error);
   }
 
-  if(errors.length)
-  {
-    return res.render('planning-to-fix-issue', {errors})
+  if (errors.length) {
+    return res.render('planning-to-fix-issue', { errors })
   }
 
   // Check whether the variable matches a condition
@@ -409,7 +387,7 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
   } else if (planningToFixIssue == "No") {
     res.redirect('/why-no-fix-issue')
 
-    }
+  }
 
 })
 
@@ -423,8 +401,7 @@ router.post('/how-fix-issue-answer', function (req, res) {
   console.log(howFixIssue)
   let errors = [];
 
-  if(howFixIssue === "")
-  {
+  if (howFixIssue === "") {
     let error = {
       id: 'how-fix-issue',
       message: 'Enter what you are doing to fix the issue'
@@ -435,9 +412,8 @@ router.post('/how-fix-issue-answer', function (req, res) {
   console.log(errors)
 
 
-  if(errors.length)
-  {
-    return res.render('/how-fix-issue', {errors})
+  if (errors.length) {
+    return res.render('/how-fix-issue', { errors })
   }
 
   //if(howFixIssue !== undefined){
@@ -453,33 +429,33 @@ router.post('/how-fix-issue-answer', function (req, res) {
   if (!req.session.data.issues) {
     req.session.data.issues = [];
   }
-try{
-  // Get the submitted data from the request session
-  const issue = {
-    id: generateRandomId(),
-    principle: req.session.data['pour-selection'],
-    criteria: req.session.data['wcag-criteria'],
-    fixIssueYN: req.session.data['planning-to-fix-issue'],
-    howFixIssue: req.session.data['how-fix-issue']
-  };
+  try {
+    // Get the submitted data from the request session
+    const issue = {
+      id: generateRandomId(),
+      principle: req.session.data['pour-selection'],
+      criteria: req.session.data['wcag-criteria'],
+      fixIssueYN: req.session.data['planning-to-fix-issue'],
+      howFixIssue: req.session.data['how-fix-issue']
+    };
 
 
-  // Push the new approved product to the session array
-  req.session.data.issues.push(issue);
+    // Push the new approved product to the session array
+    req.session.data.issues.push(issue);
 
-  console.log(issue)
+    console.log(issue)
 
 
-  //clearing session data
-  req.session.data['pour-selection'] = ""
-  req.session.data['wcag-criteria'] = ""
-  req.session.data['planning-to-fix-issue'] = ""
-  req.session.data['how-fix-issue'] = ""
+    //clearing session data
+    req.session.data['pour-selection'] = ""
+    req.session.data['wcag-criteria'] = ""
+    req.session.data['planning-to-fix-issue'] = ""
+    req.session.data['how-fix-issue'] = ""
 
-  console.log(req.session.data.issues); // For debugging
-}catch(error){
-  console.log(error)
-}
+    console.log(req.session.data.issues); // For debugging
+  } catch (error) {
+    console.log(error)
+  }
   // Redirect to the next page or back to the products page
   return res.redirect('/table-of-users-wcag-issues');
 })
@@ -502,8 +478,7 @@ router.post('/why-no-fix-issue-answer', function (req, res) {
 
   let errors = [];
 
-  if(whyNoFixIssue === "")
-  {
+  if (whyNoFixIssue === "") {
     let error = {
       id: 'why-no-fix-issue',
       message: 'Enter why you are not fixing the issue'
@@ -513,47 +488,46 @@ router.post('/why-no-fix-issue-answer', function (req, res) {
   }
 
 
-  if(errors.length)
-  {
-    return res.render('why-no-fix-issue', {errors})
+  if (errors.length) {
+    return res.render('why-no-fix-issue', { errors })
   }
-  
-try{
-  // Get the submitted data from the request session
-  const issue = {
-    id: generateRandomId(),
-    principle: req.session.data['pour-selection'],
-    criteria: req.session.data['wcag-criteria'],
-    fixIssueYN: req.session.data['planning-to-fix-issue'],
-    whyNotFixIssue: req.session.data['why-no-fix-issue']
-  };
 
-  // Push the new approved product to the session array
-  req.session.data.issues.push(issue);
+  try {
+    // Get the submitted data from the request session
+    const issue = {
+      id: generateRandomId(),
+      principle: req.session.data['pour-selection'],
+      criteria: req.session.data['wcag-criteria'],
+      fixIssueYN: req.session.data['planning-to-fix-issue'],
+      whyNotFixIssue: req.session.data['why-no-fix-issue']
+    };
 
-  console.log(issue)
+    // Push the new approved product to the session array
+    req.session.data.issues.push(issue);
+
+    console.log(issue)
 
 
-  //clearing session data
-  req.session.data['pour-selection'] = ""
-  req.session.data['wcag-criteria'] = ""
-  req.session.data['planning-to-fix-issue'] = ""
-  req.session.data['why-no-fix-issue'] = ""
+    //clearing session data
+    req.session.data['pour-selection'] = ""
+    req.session.data['wcag-criteria'] = ""
+    req.session.data['planning-to-fix-issue'] = ""
+    req.session.data['why-no-fix-issue'] = ""
 
-  console.log(req.session.data.issues); // For debugging
-}catch(error){
-  console.log(error)
-}
+    console.log(req.session.data.issues); // For debugging
+  } catch (error) {
+    console.log(error)
+  }
   // Redirect to the next page or back to the products page
   return res.redirect('/table-of-users-wcag-issues');
 })
 
 
 router.get('/table-of-users-wcag-issues', function (req, res) {
-let listOfIssues = []
-if (req.session.data.issues) {
-  listOfIssues = req.session.data.issues;
-}
-return res.render('/table-of-users-wcag-issues', {listOfIssues})
+  let listOfIssues = []
+  if (req.session.data.issues) {
+    listOfIssues = req.session.data.issues;
+  }
+  return res.render('/table-of-users-wcag-issues', { listOfIssues })
 })
 
