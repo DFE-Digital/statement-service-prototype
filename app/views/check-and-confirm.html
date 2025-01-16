@@ -40,7 +40,7 @@
               {{data['service-name']}}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="/service-details">Change<span class="govuk-visually-hidden">service name</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -51,7 +51,7 @@
               {{data['team-name']}}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+              <a class="govuk-link" href="/service-details">Change<span class="govuk-visually-hidden"> team name</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -62,7 +62,7 @@
               {{data['pm-ro-name']}}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+              <a class="govuk-link" href="/service-details">Change<span class="govuk-visually-hidden"> service owner</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -73,7 +73,7 @@
               {{data['team-email']}}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> contact details</span></a>
+              <a class="govuk-link" href="/service-details">Change<span class="govuk-visually-hidden"> team contact email</span></a>
             </dd>
           </div>
         </dl>
@@ -90,24 +90,24 @@
         <dl class="govuk-summary-list">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
+              Date audit completed
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['audit-date-day']}}/{{data['audit-date-month']}}/{{data['audit-date-year']}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="/audit-date">Change<span class="govuk-visually-hidden"> date autid completed</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
               Audit completed by
             </dt>
             <dd class="govuk-summary-list__value">
               {{data['name-audit']}}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Date audit completed
-            </dt>
-            <dd class="govuk-summary-list__value">
-              Temp date
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+              <a class="govuk-link" href="/name-audit">Change<span class="govuk-visually-hidden"> audit completed by</span></a>
             </dd>
           </div>
         </dl>
@@ -126,7 +126,7 @@
               </div>
             </dt>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="/table-of-users-wcag-issues">Change<span class="govuk-visually-hidden"> issues</span></a>
             </dd>
           </div>
         </dl>
@@ -149,7 +149,7 @@
               {{data['email-to-report-issues']}}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+              <a class="govuk-link" href="/contact-information">Change<span class="govuk-visually-hidden"> email to report issues</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -160,7 +160,7 @@
               {{data['email-for-different-format']}}
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of birth</span></a>
+              <a class="govuk-link" href="/contact-information">Change<span class="govuk-visually-hidden"> email to recieve data in different format</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -168,10 +168,10 @@
               Time to respond to user
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data['days-for-reply']}}
+              {{data['days-for-reply']}} days
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a>
+              <a class="govuk-link" href="/contact-information">Change<span class="govuk-visually-hidden"> time to respond to user</span></a>
             </dd>
           </div>
         </dl>

@@ -3,10 +3,15 @@
 {% block pageTitle %}
   GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
-
+{% block beforeContent %}
+  {{ govukBackLink({
+  text: "Back",
+  href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
 {% block content %}
 
-<h1 class="govuk-heading-l">(service name) accessibility issues</h1>
+<h1 class="govuk-heading-l">{{data['service-name']}} accessibility issues</h1>
 
 {%if listOfIssues|length>0%}
 <table class="govuk-table">
