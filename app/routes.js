@@ -3,7 +3,7 @@
 // https://prototype-kit.service.gov.uk/docs/create-routes
 //
 
-const { isDate, isValid } = require('date-fns')
+//const { isDate, isValid } = require('date-fns')
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
@@ -21,14 +21,11 @@ router.get('/wcag-specific-issues', function (req, res) {
   let selectedPrinciple = req.session.data['pour-selection'];
   if (selectedPrinciple != "") {
 
-    //console.log(data)
     const filteredData = filterByPrinciple(selectedPrinciple);
 
-
-
-    console.log(filteredData)
     return res.render('wcag-specific-issues', { criterion: filteredData })
-  } else {
+  } 
+  else {
     return res.redirect('pour-selection')
   }
 
@@ -65,7 +62,6 @@ router.post('/wcag-specific-issues-answer', function (req, res) {
 
   var specissues = req.session.data['wcag-criteria']
   var listOfIssues = req.session.data.issues
-  console.log(specissues)
   let errors = [];
 
   if (specissues === undefined) {
@@ -298,18 +294,16 @@ router.post('/name-audit-answer', function (req, res) {
 
   var nameAudit = req.session.data['name-audit']
 
-  console.log(nameAudit)
   let errors = [];
 
   if (nameAudit === "") {
     let error = {
       id: 'name-audit',
-      message: 'Enter the person who created the audit'
+      message: 'Enter the person who completed the audit'
     }
 
     errors.push(error);
   }
-  console.log(errors)
 
 
   if (errors.length) {
@@ -398,7 +392,6 @@ router.post('/how-fix-issue-answer', function (req, res) {
 
   var howFixIssue = req.session.data['how-fix-issue']
 
-  console.log(howFixIssue)
   let errors = [];
 
   if (howFixIssue === "") {
@@ -409,7 +402,6 @@ router.post('/how-fix-issue-answer', function (req, res) {
 
     errors.push(error);
   }
-  console.log(errors)
 
 
   if (errors.length) {
@@ -443,7 +435,6 @@ router.post('/how-fix-issue-answer', function (req, res) {
     // Push the new approved product to the session array
     req.session.data.issues.push(issue);
 
-    console.log(issue)
 
 
     //clearing session data
@@ -454,7 +445,6 @@ router.post('/how-fix-issue-answer', function (req, res) {
 
     console.log(req.session.data.issues); // For debugging
   } catch (error) {
-    console.log(error)
   }
   // Redirect to the next page or back to the products page
   return res.redirect('/table-of-users-wcag-issues');
@@ -505,7 +495,6 @@ router.post('/why-no-fix-issue-answer', function (req, res) {
     // Push the new approved product to the session array
     req.session.data.issues.push(issue);
 
-    console.log(issue)
 
 
     //clearing session data
@@ -514,9 +503,7 @@ router.post('/why-no-fix-issue-answer', function (req, res) {
     req.session.data['planning-to-fix-issue'] = ""
     req.session.data['why-no-fix-issue'] = ""
 
-    console.log(req.session.data.issues); // For debugging
   } catch (error) {
-    console.log(error)
   }
   // Redirect to the next page or back to the products page
   return res.redirect('/table-of-users-wcag-issues');
