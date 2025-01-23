@@ -33,6 +33,7 @@ function isValidDateCheck(day, month, year) {
 }
 
 
+// Route for 'service-details.html'
 router.post('/service-details-answer', function (req, res) {
   let serviceName = req.session.data['service-name'];
   let teamName = req.session.data['team-name'];
@@ -44,7 +45,7 @@ router.post('/service-details-answer', function (req, res) {
   if (serviceName === "") {
     let error = {
       id: 'service-name',
-      message: 'Enter the service\'s name'
+      message: 'Enter the name of the service'
     }
 
     errors.push(error)
@@ -53,7 +54,7 @@ router.post('/service-details-answer', function (req, res) {
   if (teamName === "") {
     let error = {
       id: 'team-name',
-      message: 'Enter the team that manages the service\'s name'
+      message: 'Enter the name of the team that manages the service'
     }
 
     errors.push(error)
@@ -71,7 +72,7 @@ router.post('/service-details-answer', function (req, res) {
   if (teamEmail === "") {
     let error = {
       id: 'team-email',
-      message: 'Enter the team\'s contact email'
+      message: 'Enter the contact email of the team'
     }
 
     errors.push(error)
@@ -89,6 +90,7 @@ router.post('/service-details-answer', function (req, res) {
 })
 
 
+// Route for 'audit-date.html'
 router.post('/audit-date-answer', function (req, res) {
 
   // var auditDay = req.session.data['audit-date-day'];
@@ -156,6 +158,7 @@ router.post('/audit-date-answer', function (req, res) {
 })
 
 
+// Route for 'name-audit.html'
 router.post('/name-audit-answer', function (req, res) {
 
   var nameAudit = req.session.data['name-audit']
@@ -165,7 +168,7 @@ router.post('/name-audit-answer', function (req, res) {
   if (nameAudit === "") {
     let error = {
       id: 'name-audit',
-      message: 'Enter the person who completed the audit'
+      message: 'Enter the person/team that completed the audit'
     }
 
     errors.push(error);
@@ -183,7 +186,7 @@ router.post('/name-audit-answer', function (req, res) {
 })
 
 
-// Run this code when a form is submitted to 'did-audit-find-issues'
+// Route for 'did-audit-find-issues.html'
 router.post('/did-audit-find-issues-answer', function (req, res) {
 
   // Make a variable and give it the value from 'did-audit-find-issues'
@@ -194,7 +197,7 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
   if (didAuditFindIssues === undefined) {
     let error = {
       id: 'did-audit-find-issues',
-      message: 'Select an option'
+      message: 'Select Yes if the audit found issues'
     }
 
     errors.push(error);
@@ -216,31 +219,17 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
 })
 
 
-router.get('/wcag-specific-issues', function (req, res) {
-  let selectedPrinciple = req.session.data['pour-selection'];
-  if (selectedPrinciple != "") {
-
-    const filteredData = filterByPrinciple(selectedPrinciple);
-
-    return res.render('wcag-specific-issues', { criterion: filteredData })
-  } 
-  else {
-    return res.redirect('pour-selection')
-  }
-
-})
-
-
+// Route for 'pour-selection.html'
 router.post('/pour-selection-answer', function (req, res) {
-
+  
   var genissues = req.session.data['pour-selection']
-
+  
   let errors = [];
 
   if (genissues === undefined) {
     let error = {
       id: 'pour-selection-1',
-      message: 'Select a criteria that has not been met'
+      message: 'Select the principle of the issue that has not been met'
     }
 
     errors.push(error);
@@ -258,6 +247,23 @@ router.post('/pour-selection-answer', function (req, res) {
 })
 
 
+// Filters the 'wcag-specific-issues.html' page by the 'pour-selection.html' answer
+router.get('/wcag-specific-issues', function (req, res) {
+  let selectedPrinciple = req.session.data['pour-selection'];
+  if (selectedPrinciple != "") {
+
+    const filteredData = filterByPrinciple(selectedPrinciple);
+
+    return res.render('wcag-specific-issues', { criterion: filteredData })
+  } 
+  else {
+    return res.redirect('pour-selection')
+  }
+
+})
+
+
+// Route for 'wcag-specific-issues.html'
 router.post('/wcag-specific-issues-answer', function (req, res) {
 
   var specissues = req.session.data['wcag-criteria']
@@ -267,7 +273,7 @@ router.post('/wcag-specific-issues-answer', function (req, res) {
   if (specissues === undefined) {
     let error = {
       id: 'wcag-criteria-0',
-      message: 'Select a criteria that has not been met'
+      message: 'Select the issue criteria that has not been met'
     }
 
     errors.push(error);
@@ -280,7 +286,7 @@ router.post('/wcag-specific-issues-answer', function (req, res) {
       if (issue.criteria === specissues) {
         let error = {
           id: 'wcag-criteria-0',
-          message: 'You can not select the same criteria twice'
+          message: 'You cannot select the same criteria twice. Select a different criteria'
         }
         errors.push(error);
       }
@@ -302,7 +308,7 @@ router.post('/wcag-specific-issues-answer', function (req, res) {
 })
 
 
-// Run this code when a form is submitted to '/planning-to-fix-issues'
+// Route for 'planning-to-fix-issue.html'
 router.post('/planning-to-fix-issue-answer', function (req, res) {
 
   var planningToFixIssue = req.session.data['planning-to-fix-issue']
@@ -312,7 +318,7 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
   if (planningToFixIssue === undefined) {
     let error = {
       id: 'planning-to-fix-issue',
-      message: 'Select an option'
+      message: 'Select Yes if you are planning to fix this issue'
     }
 
     errors.push(error);
@@ -334,6 +340,7 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
 })
 
 
+// Route for 'how-fix-issue.html'
 router.post('/how-fix-issue-answer', function (req, res) {
 
   var howFixIssue = req.session.data['how-fix-issue']
@@ -397,6 +404,7 @@ router.post('/how-fix-issue-answer', function (req, res) {
 })
 
 
+// Route for 'why-no-fix-issue.html'
 router.post('/why-no-fix-issue-answer', function (req, res) {
   // Check if the session data exists
   if (!req.session.data) {
@@ -454,6 +462,7 @@ router.post('/why-no-fix-issue-answer', function (req, res) {
 })
 
 
+// Route for 'table-of-users-wcag-issues.html'
 router.get('/table-of-users-wcag-issues', function (req, res) {
   let listOfIssues = []
   if (req.session.data.issues) {
@@ -463,6 +472,7 @@ router.get('/table-of-users-wcag-issues', function (req, res) {
 })
 
 
+// Route for 'contact-information.html'
 router.post('/contact-information-answer', function (req, res) {
   let reportIssues = req.session.data['email-to-report-issues'];
   let differentFormat = req.session.data['email-for-different-format'];
@@ -473,7 +483,7 @@ router.post('/contact-information-answer', function (req, res) {
   if (reportIssues === "") {
     let error = {
       id: 'email-to-report-issues',
-      message: 'Enter the email for users to report issues'
+      message: 'Enter the email for users to report issues to'
     }
 
     errors.push(error)
@@ -482,7 +492,7 @@ router.post('/contact-information-answer', function (req, res) {
   if (differentFormat === "") {
     let error = {
       id: 'email-for-different-format',
-      message: 'Enter the email for users to recieve data in a different format'
+      message: 'Enter the email for users to use to recieve data in a different format'
     }
 
     errors.push(error)
@@ -491,7 +501,7 @@ router.post('/contact-information-answer', function (req, res) {
   if (daysReply === "") {
     let error = {
       id: 'days-for-reply',
-      message: 'Enter the number of days for users to get a reply'
+      message: 'Enter the number of days for users to wait to get a reply'
     }
 
     errors.push(error)
