@@ -8,99 +8,29 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
 
+
 function generateRandomId() {
   return Math.random().toString(36).substr(2, 9); //Generates a random string
 }
+
 
 function filterByPrinciple(selectedPrinciple) {
   const data = JSON.parse(fs.readFileSync('app/data/wcag.json', 'utf8'));
   return data.filter(item => item.principle === selectedPrinciple);
 }
 
-router.get('/wcag-specific-issues', function (req, res) {
-  let selectedPrinciple = req.session.data['pour-selection'];
-  if (selectedPrinciple != "") {
 
-    const filteredData = filterByPrinciple(selectedPrinciple);
-
-    return res.render('wcag-specific-issues', { criterion: filteredData })
-  } 
-  else {
-    return res.redirect('pour-selection')
-  }
-
-})
-
-//
-router.post('/pour-selection-answer', function (req, res) {
-
-  var genissues = req.session.data['pour-selection']
-
-  let errors = [];
-
-  if (genissues === undefined) {
-    let error = {
-      id: 'pour-selection-1',
-      message: 'Select a criteria that has not been met'
-    }
-
-    errors.push(error);
-  }
-
-  if (errors.length) {
-    return res.render('pour-selection', { errors })
-  }
-
-  if (genissues !== undefined) {
-    req.session.data['wcag-criteria'] = undefined
-    res.redirect('/wcag-specific-issues')
-  }
-
-})
-
-router.post('/wcag-specific-issues-answer', function (req, res) {
-
-  var specissues = req.session.data['wcag-criteria']
-  var listOfIssues = req.session.data.issues
-  let errors = [];
-
-  if (specissues === undefined) {
-    let error = {
-      id: 'wcag-criteria-0',
-      message: 'Select a criteria that has not been met'
-    }
-
-    errors.push(error);
-  }
-  if (!listOfIssues) {
-  }
-  else if (listOfIssues.length) {
-
-    listOfIssues.forEach((issue) => {
-      if (issue.criteria === specissues) {
-        let error = {
-          id: 'wcag-criteria-0',
-          message: 'You can not select the same criteria twice'
-        }
-        errors.push(error);
-      }
-    }
-    )
-  };
-  if (errors.length) {
-    let selectedPrinciple = req.session.data['pour-selection'];
-    const filteredData = filterByPrinciple(selectedPrinciple);
-    return res.render('wcag-specific-issues', { errors, criterion: filteredData })
-  }
-
-
-
-  if (specissues !== undefined) {
-    res.redirect('/planning-to-fix-issue')
-  }
-
-})
-
+// Function to check if a date is valid
+function isValidDateCheck(day, month, year) {
+  // Month is 0-indexed in JavaScript Date (January = 0)
+  // Need to deduct 1 off the month entered
+  const date = new Date(year, month - 1, day);
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+}
 
 
 router.post('/service-details-answer', function (req, res) {
@@ -159,55 +89,6 @@ router.post('/service-details-answer', function (req, res) {
 })
 
 
-
-router.post('/contact-information-answer', function (req, res) {
-  let reportIssues = req.session.data['email-to-report-issues'];
-  let differentFormat = req.session.data['email-for-different-format'];
-  let daysReply = req.session.data['days-for-reply'];
-
-  let errors = [];
-
-  if (reportIssues === "") {
-    let error = {
-      id: 'email-to-report-issues',
-      message: 'Enter the email for users to report issues'
-    }
-
-    errors.push(error)
-  }
-
-  if (differentFormat === "") {
-    let error = {
-      id: 'email-for-different-format',
-      message: 'Enter the email for users to recieve data in a different format'
-    }
-
-    errors.push(error)
-  }
-
-  if (daysReply === "") {
-    let error = {
-      id: 'days-for-reply',
-      message: 'Enter the number of days for users to get a reply'
-    }
-
-    errors.push(error)
-  }
-
-
-  if (errors.length) {
-    return res.render('contact-information', { errors })
-  }
-
-  else {
-    res.redirect('/check-and-confirm')
-  }
-
-})
-
-
-
-
 router.post('/audit-date-answer', function (req, res) {
 
   // var auditDay = req.session.data['audit-date-day'];
@@ -254,7 +135,7 @@ router.post('/audit-date-answer', function (req, res) {
     // Validate if the date is valid
     if (auditDay && auditMonth && auditYear) {
       const isValidDate = isValidDateCheck(auditDay, auditMonth, auditYear);
-
+      
       if (!isValidDate) {
         errors.push({
           id: 'audit-date-invalid',
@@ -263,31 +144,16 @@ router.post('/audit-date-answer', function (req, res) {
       }
     }
   }
-
+  
   if (errors.length) {
     return res.render('audit-date', { errors })
   }
-
+  
   else (
     res.redirect('/name-audit')
   )
-
+  
 })
-
-
-// Function to check if a date is valid
-function isValidDateCheck(day, month, year) {
-  // Month is 0-indexed in JavaScript Date (January = 0)
-  // Need to deduct 1 off the month entered
-  const date = new Date(year, month - 1, day);
-  return (
-    date.getFullYear() === year &&
-    date.getMonth() === month - 1 &&
-    date.getDate() === day
-  );
-}
-
-
 
 
 router.post('/name-audit-answer', function (req, res) {
@@ -315,9 +181,6 @@ router.post('/name-audit-answer', function (req, res) {
   }
 
 })
-
-
-
 
 
 // Run this code when a form is submitted to 'did-audit-find-issues'
@@ -353,6 +216,91 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
 })
 
 
+router.get('/wcag-specific-issues', function (req, res) {
+  let selectedPrinciple = req.session.data['pour-selection'];
+  if (selectedPrinciple != "") {
+
+    const filteredData = filterByPrinciple(selectedPrinciple);
+
+    return res.render('wcag-specific-issues', { criterion: filteredData })
+  } 
+  else {
+    return res.redirect('pour-selection')
+  }
+
+})
+
+
+router.post('/pour-selection-answer', function (req, res) {
+
+  var genissues = req.session.data['pour-selection']
+
+  let errors = [];
+
+  if (genissues === undefined) {
+    let error = {
+      id: 'pour-selection-1',
+      message: 'Select a criteria that has not been met'
+    }
+
+    errors.push(error);
+  }
+
+  if (errors.length) {
+    return res.render('pour-selection', { errors })
+  }
+
+  if (genissues !== undefined) {
+    req.session.data['wcag-criteria'] = undefined
+    res.redirect('/wcag-specific-issues')
+  }
+
+})
+
+
+router.post('/wcag-specific-issues-answer', function (req, res) {
+
+  var specissues = req.session.data['wcag-criteria']
+  var listOfIssues = req.session.data.issues
+  let errors = [];
+
+  if (specissues === undefined) {
+    let error = {
+      id: 'wcag-criteria-0',
+      message: 'Select a criteria that has not been met'
+    }
+
+    errors.push(error);
+  }
+  if (!listOfIssues) {
+  }
+  else if (listOfIssues.length) {
+
+    listOfIssues.forEach((issue) => {
+      if (issue.criteria === specissues) {
+        let error = {
+          id: 'wcag-criteria-0',
+          message: 'You can not select the same criteria twice'
+        }
+        errors.push(error);
+      }
+    }
+    )
+  };
+  if (errors.length) {
+    let selectedPrinciple = req.session.data['pour-selection'];
+    const filteredData = filterByPrinciple(selectedPrinciple);
+    return res.render('wcag-specific-issues', { errors, criterion: filteredData })
+  }
+
+
+
+  if (specissues !== undefined) {
+    res.redirect('/planning-to-fix-issue')
+  }
+
+})
+
 
 // Run this code when a form is submitted to '/planning-to-fix-issues'
 router.post('/planning-to-fix-issue-answer', function (req, res) {
@@ -384,8 +332,6 @@ router.post('/planning-to-fix-issue-answer', function (req, res) {
   }
 
 })
-
-
 
 
 router.post('/how-fix-issue-answer', function (req, res) {
@@ -451,8 +397,6 @@ router.post('/how-fix-issue-answer', function (req, res) {
 })
 
 
-
-
 router.post('/why-no-fix-issue-answer', function (req, res) {
   // Check if the session data exists
   if (!req.session.data) {
@@ -516,5 +460,51 @@ router.get('/table-of-users-wcag-issues', function (req, res) {
     listOfIssues = req.session.data.issues;
   }
   return res.render('/table-of-users-wcag-issues', { listOfIssues })
+})
+
+
+router.post('/contact-information-answer', function (req, res) {
+  let reportIssues = req.session.data['email-to-report-issues'];
+  let differentFormat = req.session.data['email-for-different-format'];
+  let daysReply = req.session.data['days-for-reply'];
+
+  let errors = [];
+
+  if (reportIssues === "") {
+    let error = {
+      id: 'email-to-report-issues',
+      message: 'Enter the email for users to report issues'
+    }
+
+    errors.push(error)
+  }
+
+  if (differentFormat === "") {
+    let error = {
+      id: 'email-for-different-format',
+      message: 'Enter the email for users to recieve data in a different format'
+    }
+
+    errors.push(error)
+  }
+
+  if (daysReply === "") {
+    let error = {
+      id: 'days-for-reply',
+      message: 'Enter the number of days for users to get a reply'
+    }
+
+    errors.push(error)
+  }
+
+
+  if (errors.length) {
+    return res.render('contact-information', { errors })
+  }
+
+  else {
+    res.redirect('/check-and-confirm')
+  }
+
 })
 
