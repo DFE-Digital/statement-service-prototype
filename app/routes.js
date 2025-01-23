@@ -168,7 +168,7 @@ router.post('/name-audit-answer', function (req, res) {
   if (nameAudit === "") {
     let error = {
       id: 'name-audit',
-      message: 'Enter the person/team that completed the audit'
+      message: 'Enter the person or team that completed the audit'
     }
 
     errors.push(error);
@@ -197,7 +197,7 @@ router.post('/did-audit-find-issues-answer', function (req, res) {
   if (didAuditFindIssues === undefined) {
     let error = {
       id: 'did-audit-find-issues',
-      message: 'Select Yes if the audit found issues'
+      message: 'Select Yes if the audit found accessibility issues'
     }
 
     errors.push(error);
@@ -273,7 +273,7 @@ router.post('/wcag-specific-issues-answer', function (req, res) {
   if (specissues === undefined) {
     let error = {
       id: 'wcag-criteria-0',
-      message: 'Select the issue criteria that has not been met'
+      message: 'Select the criteria that has not been met'
     }
 
     errors.push(error);
@@ -396,7 +396,7 @@ router.post('/how-fix-issue-answer', function (req, res) {
     req.session.data['planning-to-fix-issue'] = ""
     req.session.data['how-fix-issue'] = ""
 
-    console.log(req.session.data.issues); // For debugging
+    // console.log(req.session.data.issues); // For debugging
   } catch (error) {
   }
   // Redirect to the next page or back to the products page
@@ -483,7 +483,7 @@ router.post('/contact-information-answer', function (req, res) {
   if (reportIssues === "") {
     let error = {
       id: 'email-to-report-issues',
-      message: 'Enter the email for users to report issues to'
+      message: 'Enter the email for users to use to report issues'
     }
 
     errors.push(error)
