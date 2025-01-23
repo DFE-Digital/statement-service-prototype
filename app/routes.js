@@ -168,7 +168,7 @@ router.post('/name-audit-answer', function (req, res) {
   if (nameAudit === "") {
     let error = {
       id: 'name-audit',
-      message: 'Enter the person or team that completed the audit'
+      message: 'Enter the name of the company that completed the audit'
     }
 
     errors.push(error);
