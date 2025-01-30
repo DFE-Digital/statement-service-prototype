@@ -3,6 +3,8 @@
 // https://prototype-kit.service.gov.uk/docs/create-routes
 //
 
+// each page is in order of their appearance in the service
+
 //const { isDate, isValid } = require('date-fns')
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
