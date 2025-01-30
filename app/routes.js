@@ -5,7 +5,7 @@
 
 // each page is in order of their appearance in the service
 
-//const { isDate, isValid } = require('date-fns')
+//const { isDate, isValid } = require('date-fns') <-- not needed
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
@@ -464,7 +464,7 @@ router.post('/why-no-fix-issue-answer', function (req, res) {
 })
 
 
-// Route for 'table-of-users-wcag-issues.html'
+// Puts the list of issues into the table
 router.get('/table-of-users-wcag-issues', function (req, res) {
   let listOfIssues = []
   if (req.session.data.issues) {
