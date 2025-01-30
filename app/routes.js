@@ -4,6 +4,9 @@
 //
 
 // each page is in order of their appearance in the service
+// (roughly)
+// there are multiple different routes you can take,
+// therefore some page aren't needed for these different routes
 
 //const { isDate, isValid } = require('date-fns') <-- not needed
 const govukPrototypeKit = require('govuk-prototype-kit')
@@ -16,6 +19,7 @@ function generateRandomId() {
 }
 
 
+// reads json and filters the page by the selected principle
 function filterByPrinciple(selectedPrinciple) {
   const data = JSON.parse(fs.readFileSync('app/data/wcag.json', 'utf8'));
   return data.filter(item => item.principle === selectedPrinciple);
